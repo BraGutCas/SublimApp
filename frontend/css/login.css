@@ -1,0 +1,133 @@
+/* ================= LOGIN PAGE ================= */
+
+.login-page{
+background:#bad9ce;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* CONTENEDOR */
+
+.login-container{
+
+background:white;
+padding:40px;
+border-radius:12px;
+width:350px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+
+text-align:center;
+
+}
+
+
+/* LOGO */
+
+.login-logo{
+width:120px;
+margin-bottom:15px;
+}
+
+
+/* TITULO */
+
+.login-container h1{
+margin-bottom:5px;
+color:#0E6973;
+}
+
+.login-subtitle{
+color:#0E6973;
+font-size:14px;
+margin-bottom:25px;
+}
+
+
+/* INPUTS */
+
+.input-group{
+text-align:left;
+margin-bottom:15px;
+}
+
+.input-group label{
+font-size:14px;
+color:#0E6973;
+display:block;
+margin-bottom:5px;
+}
+
+.input-group input{
+
+width:100%;
+padding:10px;
+
+border:1px solid #ddd;
+border-radius:6px;
+
+font-size:14px;
+
+transition:0.2s;
+
+}
+
+.input-group input:focus{
+
+outline:none;
+border-color:#f2bb16;
+box-shadow:0 0 0 2px rgba(59,142,234,0.15);
+
+}
+
+
+/* BOTON LOGIN */
+
+.login-btn{
+
+width:100%;
+padding:12px;
+
+border:none;
+border-radius:6px;
+
+background:#f2bb16;
+color:white;
+
+font-size:15px;
+font-weight:bold;
+
+cursor:pointer;
+
+transition:0.2s;
+
+margin-top:10px;
+
+}
+
+.login-btn:hover{
+background:#0E6973;
+}
+
+
+/* TEXTO REGISTRO */
+
+.register-text{
+margin-top:20px;
+font-size:14px;
+color:#555;
+}
+
+.register-text a{
+color:#0E6973;
+text-decoration:none;
+font-weight:600;
+}
+
+.register-text a:hover{
+text-decoration:underline;
+}

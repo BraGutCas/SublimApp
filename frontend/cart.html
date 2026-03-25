@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Carrito | Sublimados App</title>
+<link rel="stylesheet" href="css/cart.css">
+<link rel="stylesheet" href="css/index.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+<div class="logo">
+    <img src="assets/logo.png">
+</div>
+
+<div class="nav-links">
+    <a href="index.html">Inicio</a>
+    <a href="products.html">Productos</a>
+    <a href="orders.html">Mis Pedidos</a>
+    <a href="cart.html">Carrito</a>
+    <div id="user-section"></div>
+</div>
+
+</nav>
+
+
+<section class="cart-wrapper">
+
+<h1>Tu carrito</h1>
+
+<div class="cart-layout">
+
+<!-- PRODUCTOS -->
+<div id="cart-items"></div>
+
+
+<!-- RESUMEN -->
+<div class="cart-summary">
+
+<h2>Resumen</h2>
+
+<div class="total-row">
+<span>Total</span>
+<span id="cart-total">$0</span>
+</div>
+
+<button id="checkoutBtn" class="checkout-btn">
+Finalizar compra
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Sublimados App
+</p>
+
+</footer>
+
+
+<script src="js/navbar.js"></script>
+<script src="js/cart.js"></script>
+
+<script>
+document.getElementById("checkoutBtn").onclick = () => {
+    window.location.href = "checkout.html";
+};
+</script>
+
+
+</body>
+</html>

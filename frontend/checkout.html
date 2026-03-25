@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Checkout | Sublimados App</title>
+
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/checkout.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+<div class="logo">
+<img src="assets/logo.png" alt="Logo">
+</div>
+
+<div class="nav-links">
+    <a href="index.html">Inicio</a>
+    <a href="products.html">Productos</a>
+    <a href="cart.html">Carrito</a>
+    <div id="user-section"></div>
+</div>
+
+</nav>
+
+
+<!-- CONTENIDO -->
+
+<section class="checkout-wrapper">
+
+<h1>Finalizar compra</h1>
+
+<div class="checkout-layout">
+
+<!-- FORMULARIO -->
+
+<form id="checkoutForm" class="checkout-form">
+
+<h2>Datos de envío</h2>
+
+<input type="text" id="address" placeholder="Dirección" required>
+<input type="text" id="city" placeholder="Ciudad" required>
+<input type="text" id="phone" placeholder="Teléfono" required>
+
+<textarea id="notes" placeholder="Notas (opcional)"></textarea>
+
+<button type="submit" class="checkout-btn">
+Confirmar pedido
+</button>
+
+</form>
+
+
+<!-- RESUMEN -->
+
+<div class="checkout-summary">
+
+<h2>Resumen</h2>
+
+<div id="checkout-summary"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+<p>© 2026 Sublimados App</p>
+</footer>
+
+
+<!-- SCRIPTS -->
+<script src="js/navbar.js"></script>
+<script src="js/checkout.js"></script>
+
+</body>
+</html>

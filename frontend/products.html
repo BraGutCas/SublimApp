@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Productos | Sublimados App</title>
+
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/products.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+<div class="logo">
+    <img src="assets/logo.png" alt="Logo">
+</div>
+
+<div class="nav-links">
+    <a href="index.html">Inicio</a>
+    <a href="products.html">Productos</a>
+    <a href="orders.html">Mis Pedidos</a>
+    <a href="cart.html">Carrito</a>
+    <div id="user-section"></div>
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="products-hero">
+
+<h1>Nuestros Productos</h1>
+<p>Personaliza tazas, playeras y láminas con tus diseños</p>
+
+</section>
+
+
+<!-- PRODUCTOS -->
+
+<section class="products-page">
+
+<div id="products" class="products-grid"></div>
+
+</section>
+
+
+<!-- MODAL -->
+
+<div id="customModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2 class="modal-title">Personalizar producto</h2>
+
+        <div id="product-options"></div>
+
+        <div class="modal-field">
+            <label for="modal-images">Sube tu diseño:</label>
+            <input type="file" id="modal-images" multiple>
+        </div>
+
+        <div class="modal-buttons">
+            <button id="cancelModalBtn" class="btn-cancel">
+                Cancelar
+            </button>
+
+            <button id="confirmAddBtn" class="btn-primary">
+                Agregar al carrito
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+
+<p>
+© 2026 Sublimados App
+</p>
+
+</footer>
+
+<!-- SCRIPT -->
+<script src="js/app.js"></script>
+<script src="js/navbar.js"></script>
+
+</body>
+</html>

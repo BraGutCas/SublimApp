@@ -1,0 +1,165 @@
+{
+  "intents": [
+    {
+      "tag": "saludo",
+      "patterns": [
+        "hola",
+        "hola buenas",
+        "hola que tal",
+        "buenas",
+        "buenos dias",
+        "buenas tardes",
+        "buenas noches",
+        "que tal",
+        "qué tal",
+        "hey",
+        "buen día",
+        "buen dia",
+        "holaa"
+      ],
+      "responses": [
+        "¡Hola! 😊 ¿En qué puedo ayudarte?",
+        "¡Buenas! 👋 ¿Qué te gustaría saber hoy?"
+      ]
+    },
+
+    {
+      "tag": "precio",
+      "patterns": [
+        "precio",
+        "cuánto cuesta",
+        "cuánto vale",
+        "cuál es el precio",
+        "me puedes decir el precio",
+        "precio de una taza",
+        "cuánto cuesta una taza",
+        "precio de las playeras",
+        "cuánto cuesta una playera",
+        "precio de una lamina",
+        "cuánto cuesta una lamina",
+        "en cuanto sale",
+        "precio aproximado",
+        "cuánto me cobrarían",
+        "qué precio tiene"
+      ],
+      "responses": []
+    },
+
+    {
+      "tag": "producto_taza",
+      "patterns": [
+        "taza personalizada",
+        "quiero una taza",
+        "taza con foto",
+        "taza con nombre",
+        "taza para regalo",
+        "tazas personalizadas",
+        "venden tazas",
+        "me interesa una taza",
+        "taza sublimada",
+        "taza con frase"
+      ],
+      "responses": [
+        "Tenemos tazas personalizadas con foto, nombre o frase ☕"
+      ]
+    },
+
+    {
+      "tag": "producto_playera",
+      "patterns": [
+        "playera personalizada",
+        "playera sublimada",
+        "playeras personalizadas",
+        "camiseta personalizada",
+        "quiero una playera",
+        "playera con diseño",
+        "playera con imagen",
+        "me interesa una playera"
+      ],
+      "responses": [
+        "Manejamos playeras sublimadas de excelente calidad 👕"
+      ]
+    },
+
+    {
+      "tag": "producto_lamina",
+      "patterns": [
+        "lamina decorativa",
+        "laminas decorativas",
+        "cuadro decorativo",
+        "poster decorativo",
+        "cuadro personalizado",
+        "lamina para pared",
+        "decoracion para hogar",
+        "lamina con imagen"
+      ],
+      "responses": [
+        "Las láminas decorativas son ideales para hogar u oficina 🖼️"
+      ]
+    },
+
+    {
+      "tag": "personalizacion",
+      "patterns": [
+        "quiero personalizar",
+        "se puede personalizar",
+        "con foto",
+        "con imagen",
+        "con texto",
+        "con nombre",
+        "poner una frase",
+        "poner una imagen"
+      ],
+      "responses": [
+        "Claro 😊 Puedes personalizar con fotos, nombres o frases."
+      ]
+    },
+
+    {
+      "tag": "tiempo_entrega",
+      "patterns": [
+        "cuánto tarda",
+        "tiempo de entrega",
+        "en cuánto tiempo entregan",
+        "cuándo lo entregan",
+        "cuántos días tarda",
+        "tiempo aproximado de entrega"
+      ],
+      "responses": [
+        "El tiempo de entrega promedio es de 2 a 4 días hábiles ⏱️"
+      ]
+    },
+
+    {
+      "tag": "pedido",
+      "patterns": [
+        "quiero hacer un pedido",
+        "cómo hago un pedido",
+        "quiero comprar",
+        "cómo comprar",
+        "quiero ordenar",
+        "cómo hago mi compra",
+        "hacer pedido"
+      ],
+      "responses": [
+        "Puedes hacer tu pedido seleccionando el producto y siguiendo el proceso de compra 🛒"
+      ]
+    },
+
+    {
+      "tag": "despedida",
+      "patterns": [
+        "gracias",
+        "muchas gracias",
+        "adios",
+        "hasta luego",
+        "nos vemos",
+        "bye"
+      ],
+      "responses": [
+        "¡Gracias por visitarnos! 🙌",
+        "¡Que tengas un excelente día! 😊"
+      ]
+    }
+  ]
+}

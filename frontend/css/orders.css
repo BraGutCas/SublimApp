@@ -1,0 +1,113 @@
+/* FONDO */
+body{
+background:#bad9ce;
+}
+
+/* CONTENEDOR PRINCIPAL */
+
+.orders-wrapper{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.orders-wrapper h1{
+margin-bottom:30px;
+color:#2c3e50;
+}
+
+
+/* LISTA DE PEDIDOS */
+
+.orders-container{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+
+/* TARJETA PEDIDO */
+
+.order-card{
+
+background:white;
+border-radius:12px;
+padding:25px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+border:1px solid #eee;
+
+}
+
+
+/* HEADER PEDIDO */
+
+.order-header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+
+}
+
+.order-header h3{
+margin:0;
+color:#333;
+}
+
+.order-date{
+font-size:14px;
+color:#777;
+}
+
+
+/* STATUS */
+
+.status-badge{
+padding:6px 14px;
+border-radius:20px;
+font-size:13px;
+font-weight:600;
+text-transform:capitalize;
+}
+
+
+/* PRODUCTOS */
+
+.order-items ul{
+list-style:none;
+padding:0;
+margin-top:10px;
+}
+
+.order-items li{
+border-bottom:1px solid #eee;
+padding-bottom:15px;
+margin-bottom:15px;
+}
+
+
+/* FOOTER */
+
+.order-footer{
+display:flex;
+justify-content:flex-end;
+margin-top:10px;
+}
+
+.order-total{
+font-size:18px;
+font-weight:bold;
+color:#0E6973;
+}
+
+
+/* MENSAJES */
+
+.empty-orders,
+.error-orders{
+text-align:center;
+padding:40px;
+color:#666;
+font-size:18px;
+}

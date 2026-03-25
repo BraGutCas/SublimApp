@@ -1,0 +1,32 @@
+# =====================
+# 🐍 Python (Backend)
+# =====================
+backend/venv/
+backend/__pycache__/
+backend/**/*.pyc
+
+# Base de datos (opcional ignorar)
+backend/database.db
+
+# =====================
+# ⚛️ Frontend
+# =====================
+node_modules/
+dist/
+build/
+
+# =====================
+# 🔐 Variables de entorno
+# =====================
+.env
+
+# =====================
+# 🧠 Sistema
+# =====================
+.DS_Store
+Thumbs.db
+
+# =====================
+# 📦 Otros
+# =====================
+*.log

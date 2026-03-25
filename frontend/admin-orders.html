@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>Admin | Pedidos</title>
+
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/admin-orders.css">
+
+<!-- ICONOS (para botones) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+<div class="logo">
+<img src="assets/logo.png" alt="Logo">
+</div>
+
+<div class="nav-links">
+    <a href="admin-products.html">Productos</a>
+    <div id="user-section"></div>
+</div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="admin-header">
+
+<h1>Panel de Pedidos</h1>
+<p>Gestiona los pedidos de tus clientes</p>
+
+</section>
+
+
+<!-- MÉTRICAS -->
+
+<section class="stats">
+
+<div class="stat-card">
+<h3 id="total-orders">0</h3>
+<p>Pedidos Totales</p>
+</div>
+
+<div class="stat-card">
+<h3 id="pending-orders">0</h3>
+<p>Pendientes</p>
+</div>
+
+<div class="stat-card">
+<h3 id="completed-orders">0</h3>
+<p>Completados</p>
+</div>
+
+<div class="stat-card">
+<h3>$<span id="total-income">0</span></h3>
+<p>Ingresos</p>
+</div>
+
+</section>
+
+
+<!-- TABLA -->
+
+<section class="orders-section">
+
+<table class="orders-table">
+
+<thead>
+<tr>
+<th>Pedido</th>
+<th>Cliente</th>
+<th>Email</th>
+<th>Fecha</th>
+<th>Total</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody id="orders-list">
+<tr>
+<td colspan="6">Cargando pedidos...</td>
+</tr>
+</tbody>
+
+</table>
+
+</section>
+
+
+<!-- MODAL ENVÍO -->
+
+<div id="orderModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeOrderModal()">&times;</span>
+
+<h2>Información de Envío</h2>
+
+<div id="modalBody"></div>
+
+</div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+<p>© 2026 Sublimados App - Admin</p>
+</footer>
+
+
+<!-- SCRIPTS -->
+<script src="js/navbar.js"></script>
+<script src="js/admin-orders.js"></script>
+
+</body>
+</html>
