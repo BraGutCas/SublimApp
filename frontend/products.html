@@ -7,6 +7,8 @@
 
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/products.css">
+<link rel="stylesheet" href="css/chatbot.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
@@ -78,17 +80,48 @@
 
 </div>
 
-<footer>
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>© 2026 SublimApp</p>
 
-<p>
-© 2026 Sublimados App
-</p>
+        <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" class="instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
 
+            <a href="https://www.facebook.com/mjvc.zapotlanejo.5" target="_blank" class="facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <a href="https://wa.me/523325101301" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
 </footer>
+
+<!-- 💬 CHATBOT -->
+<div id="chatbot-container">
+    <div id="chatbot-header">
+        <span>Asistente</span>
+        <button id="close-chat">✖</button>
+    </div>
+
+    <div id="chatbot-messages"></div>
+
+    <div id="chatbot-input">
+        <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
+        <button id="send-btn">➤</button>
+    </div>
+</div>
+
+<button id="chatbot-toggle">💬</button>
 
 <!-- SCRIPT -->
 <script src="js/app.js"></script>
 <script src="js/navbar.js"></script>
+<script src="js/chatbot.js"></script>
 
 </body>
 </html>

@@ -301,11 +301,33 @@ color:#0E6973;
 /* FOOTER */
 /* ========================= */
 
-footer{
-text-align:center;
-padding:20px;
-background:#222;
-color:white;
+.footer {
+    background: #222;
+    color: white;
+    padding: 20px 0; /* solo arriba y abajo */
+}
+
+/* 👇 CONTENEDOR CENTRADO */
+.footer-content {
+    max-width: 800px;   /* ancho máximo */
+    margin: 0 auto;      /* centra */
+    padding: 0 40px;     /* espacio a los lados */
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 20px;
+    margin-left: 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
 }
 
 

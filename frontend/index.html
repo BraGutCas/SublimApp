@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Sublimados App</title>
+
 <link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/chatbot.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -45,8 +49,9 @@ Ver Productos
 
 </section>
 
+
 <!-- DESCRIPCION -->
- <section class="about">
+<section class="about">
     <div class="about-container">
 
         <h2>Sublimación personalizada de alta calidad</h2>
@@ -101,7 +106,6 @@ Ver Productos
 
 
 <!-- COMO FUNCIONA -->
-
 <section class="steps">
 
 <h2>¿Cómo funciona?</h2>
@@ -134,7 +138,6 @@ Ver Productos
 
 
 <!-- CTA -->
-
 <section class="cta">
 
 <h2>¿Listo para crear algo increíble?</h2>
@@ -147,15 +150,51 @@ Comprar ahora
 
 
 <!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>© 2026 SublimApp</p>
 
-<footer>
+        <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" class="instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
 
-<p>
-© 2026 Sublimados App
-</p>
+            <a href="https://www.facebook.com/mjvc.zapotlanejo.5" target="_blank" class="facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
 
+            <a href="https://wa.me/523325101301" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
 </footer>
 
+
+<!-- 💬 CHATBOT -->
+<div id="chatbot-container">
+    <div id="chatbot-header">
+        <span>Asistente virtual</span>
+    </div>
+
+    <div id="chatbot-messages"></div>
+
+    <div id="chatbot-input">
+        <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
+        <button id="send-btn">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+<button id="chatbot-toggle">
+    <i class="fas fa-comment-dots"></i>
+</button>
+
+
 </body>
+
 <script src="js/navbar.js"></script>
+<script src="js/chatbot.js"></script>
+
 </html>

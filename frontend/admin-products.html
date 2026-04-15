@@ -16,7 +16,7 @@
 <nav class="navbar">
 
 <div class="logo">
-<img src="assets/logo.png" alt="Logo">
+    <img src="assets/logo.png" alt="Logo">
 </div>
 
 <div class="nav-links">
@@ -28,7 +28,6 @@
 
 
 <!-- HEADER ADMIN -->
-
 <section class="admin-header">
 
 <h1>Panel de Productos</h1>
@@ -38,27 +37,92 @@
 
 
 <!-- CONTENIDO -->
-
 <section class="admin-products">
 
 <div class="admin-actions">
-
-<button id="addProductBtn" class="add-btn">
-+ Agregar producto
-</button>
-
+    <button id="addProductBtn" class="add-btn">
+        + Agregar producto
+    </button>
 </div>
 
-
 <!-- GRID DE PRODUCTOS -->
-
 <div id="products" class="admin-products-grid"></div>
 
 </section>
 
 
-<!-- FOOTER -->
+<!-- 🧾 MODAL AGREGAR PRODUCTO -->
+<div id="productModal" class="modal hidden">
 
+    <div class="modal-content">
+        <h2>Agregar Producto</h2>
+
+        <form id="product-form" enctype="multipart/form-data">
+
+            <!-- NOMBRE -->
+            <input 
+                type="text" 
+                id="name" 
+                placeholder="Nombre del producto" 
+                required
+            >
+
+            <!-- DESCRIPCIÓN -->
+            <textarea 
+                id="description" 
+                placeholder="Descripción del producto"
+                required
+            ></textarea>
+
+            <!-- PRECIO -->
+            <input 
+                type="number" 
+                id="price" 
+                placeholder="Precio" 
+                required
+            >
+
+            <!-- CATEGORÍA -->
+            <input 
+                type="text" 
+                id="category" 
+                list="categories-list"
+                placeholder="Categoría (puedes escribir una nueva)"
+                required
+            >
+
+            <datalist id="categories-list">
+                <option value="Tazas">
+                <option value="Playeras">
+                <option value="Láminas">
+            </datalist>
+
+            <!-- IMAGEN -->
+            <input 
+                type="file" 
+                id="image" 
+                accept="image/*"
+            >
+
+            <!-- PREVIEW -->
+            <img id="imagePreview" class="image-preview hidden">
+
+            <!-- BOTÓN -->
+            <button type="submit" class="save-btn">
+                Guardar
+            </button>
+
+        </form>
+
+        <button id="closeModal" class="close-btn">
+            Cerrar
+        </button>
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
 <footer>
 <p>© 2026 Sublimados App - Admin</p>
 </footer>

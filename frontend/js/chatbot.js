@@ -1,41 +1,40 @@
-const chatMessages = document.getElementById("chat-messages");
+// ==============================
+// 📌 ELEMENTOS DEL DOM
+// ==============================
+const chatMessages = document.getElementById("chatbot-messages");
 const chatInput = document.getElementById("chat-input");
 const sendBtn = document.getElementById("send-btn");
-const chatToggle = document.getElementById("chat-toggle");
-const chatbot = document.getElementById("chatbot");
+const chatToggle = document.getElementById("chatbot-toggle");
+const chatbot = document.getElementById("chatbot-container");
 
+// ==============================
+// 💬 AGREGAR MENSAJE
+// ==============================
 function addMessage(sender, text) {
     const messageWrapper = document.createElement("div");
     messageWrapper.classList.add("message");
 
     if (sender === "Tú") {
-        messageWrapper.classList.add("user-message");
+        messageWrapper.classList.add("user");
     } else {
-        messageWrapper.classList.add("bot-message");
+        messageWrapper.classList.add("bot");
     }
 
-    messageWrapper.innerHTML = `
-        <div class="bubble">
-            ${text}
-        </div>
-    `;
+    messageWrapper.textContent = text;
 
     chatMessages.appendChild(messageWrapper);
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    return messageWrapper;
 }
 
-// 🔹 Mostrar indicador de escribiendo
+// ==============================
+// ⏳ INDICADOR "ESCRIBIENDO"
+// ==============================
 function showTypingIndicator() {
     const typing = document.createElement("div");
-    typing.classList.add("message", "bot-message");
+    typing.classList.add("message", "bot");
     typing.id = "typing-indicator";
 
-    typing.innerHTML = `
-        <div class="bubble typing">
-            escribiendo...
-        </div>
-    `;
+    typing.textContent = "Escribiendo...";
 
     chatMessages.appendChild(typing);
     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -46,8 +45,12 @@ function removeTypingIndicator() {
     if (typing) typing.remove();
 }
 
-sendBtn.addEventListener("click", async () => {
+// ==============================
+// 🚀 ENVIAR MENSAJE
+// ==============================
+async function sendMessage() {
     const message = chatInput.value.trim();
+    console.log("ENVIANDO:", message);
     if (!message) return;
 
     addMessage("Tú", message);
@@ -56,10 +59,10 @@ sendBtn.addEventListener("click", async () => {
     showTypingIndicator();
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/api/chatbot/", {
+        const response = await fetch("http://127.0.0.1:7000/predict", {
             method: "POST",
-            headers: { 
-                "Content-Type": "application/json" 
+            headers: {
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({ message })
         });
@@ -75,27 +78,33 @@ sendBtn.addEventListener("click", async () => {
 
     } catch (error) {
         removeTypingIndicator();
-        addMessage("Bot", error.message || "No se pudo conectar 🤖❌");
+        addMessage("Bot", "No se pudo conectar con el servidor 🤖❌");
+        console.error(error);
     }
-});
+}
 
-// Enviar con Enter
-chatInput.addEventListener("keypress", function (e) {
+// ==============================
+// 🎯 EVENTOS
+// ==============================
+sendBtn.addEventListener("click", sendMessage);
+
+chatInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
-        sendBtn.click();
+        sendMessage();
     }
 });
 
+// ==============================
+// 🔄 TOGGLE CHAT
+// ==============================
 chatToggle.addEventListener("click", () => {
-    const isVisible = chatbot.classList.contains("chat-visible");
+    const isOpen = chatbot.style.display === "flex";
 
-    if (isVisible) {
-        chatbot.classList.remove("chat-visible");
-        chatbot.classList.add("chat-hidden");
+    if (isOpen) {
+        chatbot.style.display = "none";
         chatToggle.textContent = "💬";
     } else {
-        chatbot.classList.remove("chat-hidden");
-        chatbot.classList.add("chat-visible");
+        chatbot.style.display = "flex";
         chatToggle.textContent = "✖";
     }
 });

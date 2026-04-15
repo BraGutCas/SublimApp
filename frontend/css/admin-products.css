@@ -1,181 +1,286 @@
 /* ================= ADMIN PRODUCTS ================= */
 
 /* FONDO GENERAL */
-body{
-background:#bad9ce;
+body {
+    background: #bad9ce;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 
-/* HEADER */
+/* ================= HEADER ================= */
 
-.admin-header{
-padding:40px 10%;
+.admin-header {
+    padding: 40px 10%;
 }
 
-.admin-header h1{
-margin:0;
-font-size:28px;
-color:#000000;
+.admin-header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #000;
 }
 
-.admin-header p{
-color:#777;
-margin-top:5px;
-}
-
-
-/* CONTENEDOR */
-
-.admin-products{
-padding:0 10% 60px;
+.admin-header p {
+    color: #555;
+    margin-top: 5px;
 }
 
 
-/* BOTÓN AGREGAR */
+/* ================= CONTENEDOR ================= */
 
-.admin-actions{
-display:flex;
-justify-content:flex-end;
-margin-bottom:20px;
-}
-
-.add-btn{
-
-background:#f2bb16;
-color:rgb(0, 0, 0);
-
-border:none;
-padding:12px 20px;
-
-border-radius:8px;
-font-weight:bold;
-
-cursor:pointer;
-
-transition:0.2s;
-
-}
-
-.add-btn:hover{
-background:#0E6973;
+.admin-products {
+    padding: 0 10% 60px;
 }
 
 
-/* GRID */
+/* ================= BOTÓN AGREGAR ================= */
 
-.admin-products-grid{
+.admin-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
 
-display:grid;
-grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
-gap:25px;
+.add-btn {
+    background: #f2bb16;
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
+.add-btn:hover {
+    background: #0E6973;
+    color: white;
 }
 
 
-/* CARD PRODUCTO */
+/* ================= GRID ================= */
 
-.product-card{
-
-background:white;
-border-radius:12px;
-
-padding:20px;
-
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
-
-text-align:center;
-
-transition:0.2s;
-
-position:relative;
-
-}
-
-.product-card:hover{
-transform:translateY(-5px);
+.admin-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
 }
 
 
-/* IMAGEN */
+/* ================= CARD PRODUCTO ================= */
 
-.product-card img{
-width:100%;
-height:180px;
-object-fit:contain;
-margin-bottom:15px;
+.product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: 0.25s;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
 }
 
 
-/* TEXTO */
+/* ================= IMAGEN ================= */
 
-.product-card h3{
-margin:10px 0 5px;
-color:#333;
-}
-
-.product-card p{
-margin:5px 0;
-color:#666;
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 15px;
 }
 
 
-/* BOTÓN TOGGLE */
+/* ================= TEXTO ================= */
 
-.toggle-product-btn{
-
-margin-top:10px;
-
-background:#f2bb16;
-color:rgb(0, 0, 0);
-
-border:none;
-padding:10px;
-
-border-radius:6px;
-
-cursor:pointer;
-
-font-weight:bold;
-
-transition:0.2s;
-
+.product-card h3 {
+    margin: 10px 0 5px;
+    color: #333;
 }
 
-.toggle-product-btn:hover{
-background:#0E6973;
+.product-card p {
+    margin: 5px 0;
+    color: #666;
 }
 
 
-/* PRODUCTO INACTIVO */
+/* ================= BOTÓN TOGGLE ================= */
 
-.product-card.inactive{
-opacity:0.6;
+.toggle-product-btn {
+    margin-top: 10px;
+    background: #f2bb16;
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-.product-card.inactive::after{
-
-content:"INACTIVO";
-
-position:absolute;
-top:10px;
-right:10px;
-
-background:#e74c3c;
-color:white;
-
-font-size:12px;
-padding:5px 10px;
-border-radius:20px;
-
+.toggle-product-btn:hover {
+    background: #0E6973;
+    color: white;
 }
 
 
-/* FOOTER */
+/* ================= PRODUCTO INACTIVO ================= */
 
-footer{
-margin-top:40px;
-text-align:center;
-padding:20px;
-background:#222;
-color:white;
+.product-card.inactive {
+    opacity: 0.6;
+}
+
+.product-card.inactive::after {
+    content: "INACTIVO";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #e74c3c;
+    color: white;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+
+/* ================= MODAL ================= */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+/* oculto */
+.hidden {
+    display: none;
+}
+
+/* contenido */
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    width: 320px;
+    max-width: 90%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+    animation: fadeIn 0.3s ease;
+}
+
+/* título */
+.modal-content h2 {
+    margin: 0;
+    text-align: center;
+}
+
+/* inputs generales */
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-family: inherit;
+}
+
+/* focus */
+.modal-content input:focus,
+.modal-content textarea:focus,
+.modal-content select:focus {
+    border-color: #3b8eea;
+}
+
+/* textarea */
+.modal-content textarea {
+    resize: none;
+    height: 80px;
+}
+
+/* select */
+.modal-content select {
+    background: white;
+    cursor: pointer;
+}
+
+/* preview imagen */
+.image-preview {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+}
+
+/* botón guardar */
+.save-btn {
+    background: #3b8eea;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.save-btn:hover {
+    background: #2f76c5;
+}
+
+/* botón cerrar */
+.close-btn {
+    background: #ccc;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    background: #999;
+    color: white;
+}
+
+/* animación */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px;
+    background: #222;
+    color: white;
 }
