@@ -2,6 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+
+<!-- 🔥 CLAVE PARA RESPONSIVE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sublimados App</title>
 
 <link rel="stylesheet" href="css/index.css">
@@ -15,17 +19,23 @@
 <!-- NAVBAR -->
 <nav class="navbar">
 
-<div class="logo">
-    <img src="assets/logo.png" alt="Logo">
-</div>
+    <div class="logo">
+        <img src="assets/logo.png" alt="Logo">
+    </div>
 
-<div class="nav-links">
-    <a href="index.html">Inicio</a>
-    <a href="products.html">Productos</a>
-    <a href="orders.html">Mis Pedidos</a>
-    <a href="cart.html">Carrito</a>
-    <div id="user-section"></div>
-</div>
+    <!-- 🔥 ENVOLTORIO PARA FLEXIBILIDAD -->
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Inicio</a>
+        <a href="products.html">Productos</a>
+        <a href="orders.html">Mis Pedidos</a>
+        <a href="cart.html">Carrito</a>
+        <div id="user-section"></div>
+    </div>
+
+    <!-- 🔥 BOTÓN HAMBURGUESA (solo móvil) -->
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
 
 </nav>
 
@@ -33,19 +43,19 @@
 <!-- HERO -->
 <section class="hero">
 
-<div class="hero-content">
+    <div class="hero-content">
 
-<h1>Convierte tus ideas en productos únicos</h1>
+        <h1>Convierte tus ideas en productos únicos</h1>
 
-<p>
-Playeras, tazas y láminas personalizadas con tus diseños.
-</p>
+        <p>
+            Playeras, tazas y láminas personalizadas con tus diseños.
+        </p>
 
-<a href="products.html" class="hero-btn">
-Ver Productos
-</a>
+        <a href="products.html" class="hero-btn">
+            Ver Productos
+        </a>
 
-</div>
+    </div>
 
 </section>
 
@@ -78,29 +88,30 @@ Ver Productos
 <!-- PRODUCTOS -->
 <section class="products">
 
-<h2>Nuestros Productos</h2>
+    <h2>Nuestros Productos</h2>
 
-<div class="product-grid">
+    <!-- 🔥 GRID FLEXIBLE -->
+    <div class="product-grid">
 
-<div class="product-card">
-<img src="assets/products/Taza.png">
-<h3>Tazas Personalizadas</h3>
-<p>Diseña tu taza con cualquier imagen.</p>
-</div>
+        <div class="product-card">
+            <img src="assets/products/Taza.png">
+            <h3>Tazas Personalizadas</h3>
+            <p>Diseña tu taza con cualquier imagen.</p>
+        </div>
 
-<div class="product-card">
-<img src="assets/products/Playera.png">
-<h3>Playeras Personalizadas</h3>
-<p>Imprime tu estilo en cada prenda.</p>
-</div>
+        <div class="product-card">
+            <img src="assets/products/Playera.png">
+            <h3>Playeras Personalizadas</h3>
+            <p>Imprime tu estilo en cada prenda.</p>
+        </div>
 
-<div class="product-card">
-<img src="assets/products/Lamina.png">
-<h3>Láminas Decorativas</h3>
-<p>Arte único para tus espacios.</p>
-</div>
+        <div class="product-card">
+            <img src="assets/products/Lamina.png">
+            <h3>Láminas Decorativas</h3>
+            <p>Arte único para tus espacios.</p>
+        </div>
 
-</div>
+    </div>
 
 </section>
 
@@ -108,31 +119,31 @@ Ver Productos
 <!-- COMO FUNCIONA -->
 <section class="steps">
 
-<h2>¿Cómo funciona?</h2>
+    <h2>¿Cómo funciona?</h2>
 
-<div class="steps-grid">
+    <div class="steps-grid">
 
-<div class="step">
-<h3>1</h3>
-<p>Elige tu producto</p>
-</div>
+        <div class="step">
+            <h3>1</h3>
+            <p>Elige tu producto</p>
+        </div>
 
-<div class="step">
-<h3>2</h3>
-<p>Sube tu diseño</p>
-</div>
+        <div class="step">
+            <h3>2</h3>
+            <p>Sube tu diseño</p>
+        </div>
 
-<div class="step">
-<h3>3</h3>
-<p>Nosotros lo sublimamos</p>
-</div>
+        <div class="step">
+            <h3>3</h3>
+            <p>Nosotros lo sublimamos</p>
+        </div>
 
-<div class="step">
-<h3>4</h3>
-<p>Recibe tu pedido</p>
-</div>
+        <div class="step">
+            <h3>4</h3>
+            <p>Recibe tu pedido</p>
+        </div>
 
-</div>
+    </div>
 
 </section>
 
@@ -140,11 +151,11 @@ Ver Productos
 <!-- CTA -->
 <section class="cta">
 
-<h2>¿Listo para crear algo increíble?</h2>
+    <h2>¿Listo para crear algo increíble?</h2>
 
-<a href="products.html" class="cta-btn">
-Comprar ahora
-</a>
+    <a href="products.html" class="cta-btn">
+        Comprar ahora
+    </a>
 
 </section>
 
@@ -192,9 +203,18 @@ Comprar ahora
 </button>
 
 
-</body>
+<!-- 🔥 SCRIPT PARA MENÚ RESPONSIVE -->
+<script>
+const toggle = document.getElementById("menuToggle");
+const nav = document.getElementById("navLinks");
+
+toggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
+});
+</script>
 
 <script src="js/navbar.js"></script>
 <script src="js/chatbot.js"></script>
 
+</body>
 </html>

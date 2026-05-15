@@ -1,141 +1,195 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!token || !user) {
-        window.location.href = "login.html";
-        return;
-    }
+    const BASE_URL = "http://192.168.100.2:5000";
 
     const form = document.getElementById("checkoutForm");
     const summaryContainer = document.getElementById("checkout-summary");
 
+    const token = localStorage.getItem("token");
+
     // ===============================
-    // CARGAR CARRITO
+    // 🔐 VALIDACIÓN DE SESIÓN
     // ===============================
-    async function loadCheckout() {
+    if (!token) {
+        alert("Debes iniciar sesión");
+        window.location.href = "login.html";
+        return;
+    }
+
+    // ===============================
+    // 📦 CARGAR RESUMEN DEL CARRITO
+    // ===============================
+    async function loadSummary() {
         try {
-            const response = await fetch("http://127.0.0.1:5000/api/cart/", {
+
+            const response = await fetch(`${BASE_URL}/api/cart/`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
             });
 
-            if (!response.ok) throw new Error("Error cargando carrito");
+            if (!response.ok) {
+                throw new Error("Error al obtener carrito");
+            }
 
             const data = await response.json();
-            renderCheckout(data);
+            renderSummary(data);
 
         } catch (error) {
             console.error(error);
-            summaryContainer.innerHTML = "<p>Error cargando carrito</p>";
+            summaryContainer.innerHTML = `
+                <p style="color:red;">Error cargando resumen</p>
+            `;
         }
     }
 
-    function renderCheckout(data) {
-
-        summaryContainer.innerHTML = "";
+    // ===============================
+    // 🎨 RENDER RESUMEN
+    // ===============================
+    function renderSummary(data) {
 
         if (!data.items || data.items.length === 0) {
-            summaryContainer.innerHTML = "<p>Tu carrito está vacío 😢</p>";
+            summaryContainer.innerHTML = "<p>Tu carrito está vacío</p>";
             return;
         }
 
+        let html = "";
+
         data.items.forEach(item => {
 
-            const normalizedPath = item.image.replace(/\\/g, "/");
-            const imageUrl = `http://127.0.0.1:5000/${normalizedPath}`;
-
-            let extraInfo = "";
+            let extra = "";
 
             if (item.size) {
-                extraInfo = `<p><strong>Talla:</strong> ${item.size}</p>`;
+                extra = `<p><strong>Talla:</strong> ${item.size}</p>`;
             } else if (item.cup_type) {
-                extraInfo = `<p><strong>Tipo:</strong> ${item.cup_type}</p>`;
+                extra = `<p><strong>Tipo:</strong> ${item.cup_type}</p>`;
             }
 
-            summaryContainer.innerHTML += `
+            const imageUrl = item.image
+                ? (item.image.startsWith("http")
+                    ? item.image
+                    : `${BASE_URL}/${item.image}`)
+                : "";
+
+            html += `
                 <div class="checkout-item">
+
                     <div class="checkout-item-content">
-                        <img src="${imageUrl}" 
-                             alt="${item.name}" 
-                             class="checkout-image">
+
+                        ${imageUrl ? `
+                            <img src="${imageUrl}" class="checkout-image">
+                        ` : ""}
+
                         <div class="checkout-info">
                             <h4>${item.name}</h4>
-                            ${extraInfo}
-                            <p>Cantidad: ${item.quantity}</p>
-                            <p>Precio unitario: $${item.price.toFixed(2)}</p>
-                            <p><strong>Subtotal: $${item.subtotal.toFixed(2)}</strong></p>
+                            ${extra}
+                            <p>${item.quantity} × $${item.price}</p>
+                            <p><strong>$${item.subtotal}</strong></p>
                         </div>
+
                     </div>
+
                 </div>
             `;
         });
 
-        summaryContainer.innerHTML += `
+        html += `
             <div class="checkout-total">
-                <strong>Total: $${data.total.toFixed(2)}</strong>
+                Total: $${data.total}
             </div>
         `;
+
+        summaryContainer.innerHTML = html;
     }
 
     // ===============================
-    // ENVIAR PEDIDO
+    // 🧠 VALIDACIÓN FORM
     // ===============================
-    form.addEventListener("submit", async function (e) {
+    function validateForm(address, city, phone) {
 
+        if (!address || address.length < 5) {
+            return "Dirección inválida";
+        }
+
+        if (!city || city.length < 2) {
+            return "Ciudad inválida";
+        }
+
+        if (!phone || phone.length < 8) {
+            return "Teléfono inválido";
+        }
+
+        return null;
+    }
+
+    // ===============================
+    // 🚀 ENVIAR PEDIDO
+    // ===============================
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        e.stopPropagation();
 
         const address = document.getElementById("address").value.trim();
         const city = document.getElementById("city").value.trim();
         const phone = document.getElementById("phone").value.trim();
         const notes = document.getElementById("notes").value.trim();
 
-        if (!address || !city || !phone) {
-            alert("Completa todos los campos obligatorios");
+        const error = validateForm(address, city, phone);
+
+        if (error) {
+            alert(error);
             return;
         }
 
+        const submitBtn = form.querySelector("button");
+
+        // 🔄 Loader
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Procesando...";
+
         try {
 
-            const response = await fetch(
-                "http://127.0.0.1:5000/api/orders/from-cart",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        customer_name: user.name,
-                        phone,
-                        address,
-                        city,
-                        notes
-                    })
-                }
-            );
+            const response = await fetch(`${BASE_URL}/api/orders/from-cart`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    address,
+                    city,
+                    phone,
+                    notes
+                })
+            });
 
-            if (!response.ok) {
-                alert("❌ Error al crear el pedido");
-                return;
+            let data;
+            try {
+                data = await response.json();
+            } catch {
+                throw new Error("Respuesta inválida del servidor");
             }
 
-            // 🔥 Guardamos bandera de éxito
+            if (!response.ok) {
+                throw new Error(data.error || "Error al procesar pedido");
+            }
+
+            // ✅ Éxito
             localStorage.setItem("orderSuccess", "true");
 
-            // 🔥 Redirección limpia (la que ya te funcionaba)
             window.location.href = "index.html";
 
         } catch (error) {
             console.error(error);
-            alert("Error de conexión con el servidor");
+            alert(error.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Confirmar pedido";
         }
-
     });
 
-    loadCheckout();
+    // ===============================
+    // 🚀 INIT
+    // ===============================
+    loadSummary();
 
 });

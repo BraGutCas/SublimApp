@@ -1,82 +1,124 @@
-const API_BASE = "http://127.0.0.1:5000/api/auth";
+// ==============================
+// 🌐 CONFIGURACIÓN
+// ==============================
+const API_BASE = "http://192.168.100.2:5000/api/auth";
 
-/* ================= REGISTRO ================= */
+// ==============================
+// 📌 HELPERS
+// ==============================
+function showError(message) {
+    alert(message);
+}
+
+// ==============================
+// 📝 REGISTRO
+// ==============================
 const registerForm = document.getElementById("registerForm");
 
 if (registerForm) {
     registerForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+        e.preventDefault();       
 
-        const data = {
-            name: document.getElementById("name").value.trim(),
-            email: document.getElementById("email").value.trim(),
-            password: document.getElementById("password").value
-        };
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        if (!name || !email || !password) {
+            showError("Completa todos los campos");
+            return;
+        }
 
         try {
             const response = await fetch(`${API_BASE}/register`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name, email, password })
             });
 
-            const result = await response.json();
-            alert(result.message);
-
-            if (response.ok) {
-                window.location.href = "login.html";
+            let data;
+            try {
+                data = await response.json();
+            } catch {
+                throw new Error("Respuesta inválida del servidor");
             }
-        } catch (err) {
-            console.error(err);
-            alert("Error de conexión con el servidor");
+
+            if (!response.ok) {
+                throw new Error(data.message || "Error al registrar");
+            }       
+            
+            window.location.href = "login.html";
+            alert("Cuenta creada correctamente ✅");
+
+        } catch (error) {
+            console.error("REGISTER ERROR:", error);
+            showError(error.message || "Error de conexión con el servidor");
         }
     });
 }
 
-/* ================= LOGIN ================= */
+// ==============================
+// 🔐 LOGIN
+// ==============================
 const loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const data = {
-            email: document.getElementById("email").value.trim(),
-            password: document.getElementById("password").value
-        };
+        const email = document.getElementById("email")?.value.trim();
+        const password = document.getElementById("password")?.value;
+
+        if (!email || !password) {
+            showError("Completa todos los campos");
+            return;
+        }
 
         try {
             const response = await fetch(`${API_BASE}/login`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
             });
 
-            const result = await response.json();
-            console.log(result)
-
-            if (!response.ok) {
-                alert(result.message || "Credenciales incorrectas");
-                return;
+            let data;
+            try {
+                data = await response.json();
+            } catch {
+                throw new Error("Respuesta inválida del servidor");
             }
 
+            if (!response.ok) {
+                throw new Error(data.message || "Credenciales incorrectas");
+            }
 
-            // ✅ GUARDAR TOKEN Y USUARIO
-            localStorage.setItem("token", result.access_token); // ⬅️ IMPORTANTE
-            localStorage.setItem("user", JSON.stringify(result.user));
+            // ==============================
+            // ✅ GUARDAR SESIÓN
+            // ==============================
+            localStorage.setItem("token", data.access_token);
+            localStorage.setItem("user", JSON.stringify(data.user));
 
-            console.log("LOGIN OK:", result.user);
+            console.log("LOGIN OK:", data.user);
 
+            // ==============================
             // 🔀 REDIRECCIÓN POR ROL
-            if (result.user.role === "admin") {
+            // ==============================
+            if (data.user.role === "admin") {
                 window.location.href = "admin-products.html";
             } else {
                 window.location.href = "index.html";
             }
 
-        } catch (err) {
-            console.error(err);
-            alert("Error de conexión con el servidor");
+        } catch (error) {
+            console.error("LOGIN ERROR:", error);
+            showError(error.message || "Error de conexión con el servidor");
         }
     });
 }

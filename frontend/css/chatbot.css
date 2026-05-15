@@ -119,3 +119,11 @@
 #send-btn:hover {
     background: #0E6973;
 }
+
+#chatbot-container {
+    display: none;
+}
+
+#chatbot-container.active {
+    display: flex;
+}

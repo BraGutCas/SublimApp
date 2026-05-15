@@ -3,6 +3,10 @@
 
 <head>
 <meta charset="UTF-8">
+
+<!-- 🔥 CLAVE RESPONSIVE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Productos | Sublimados App</title>
 
 <link rel="stylesheet" href="css/index.css">
@@ -17,42 +21,44 @@
 <!-- NAVBAR -->
 <nav class="navbar">
 
-<div class="logo">
-    <img src="assets/logo.png" alt="Logo">
-</div>
+    <div class="logo">
+        <img src="assets/logo.png" alt="Logo">
+    </div>
 
-<div class="nav-links">
-    <a href="index.html">Inicio</a>
-    <a href="products.html">Productos</a>
-    <a href="orders.html">Mis Pedidos</a>
-    <a href="cart.html">Carrito</a>
-    <div id="user-section"></div>
-</div>
+    <!-- 🔥 NAV LINKS CON ID -->
+    <div class="nav-links" id="navLinks">
+        <a href="index.html">Inicio</a>
+        <a href="products.html">Productos</a>
+        <a href="orders.html">Mis Pedidos</a>
+        <a href="cart.html">Carrito</a>
+        <div id="user-section"></div>
+    </div>
+
+    <!-- 🔥 MENÚ HAMBURGUESA -->
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
 
 </nav>
 
 
 <!-- HERO -->
-
 <section class="products-hero">
-
-<h1>Nuestros Productos</h1>
-<p>Personaliza tazas, playeras y láminas con tus diseños</p>
-
+    <h1>Nuestros Productos</h1>
+    <p>Personaliza tazas, playeras y láminas con tus diseños</p>
 </section>
 
 
 <!-- PRODUCTOS -->
-
 <section class="products-page">
 
-<div id="products" class="products-grid"></div>
+    <!-- 🔥 CONTENEDOR DINÁMICO -->
+    <div id="products" class="products-grid"></div>
 
 </section>
 
 
 <!-- MODAL -->
-
 <div id="customModal" class="modal">
 
     <div class="modal-content">
@@ -80,45 +86,62 @@
 
 </div>
 
+
 <!-- FOOTER -->
 <footer class="footer">
     <div class="footer-content">
         <p>© 2026 SublimApp</p>
 
         <div class="social-icons">
-            <a href="https://instagram.com" target="_blank" class="instagram">
+            <a href="https://instagram.com" target="_blank">
                 <i class="fab fa-instagram"></i>
             </a>
 
-            <a href="https://www.facebook.com/mjvc.zapotlanejo.5" target="_blank" class="facebook">
+            <a href="https://www.facebook.com/mjvc.zapotlanejo.5" target="_blank">
                 <i class="fab fa-facebook-f"></i>
             </a>
 
-            <a href="https://wa.me/523325101301" target="_blank" class="whatsapp">
+            <a href="https://wa.me/523325101301" target="_blank">
                 <i class="fab fa-whatsapp"></i>
             </a>
         </div>
     </div>
 </footer>
 
+
 <!-- 💬 CHATBOT -->
 <div id="chatbot-container">
     <div id="chatbot-header">
-        <span>Asistente</span>
-        <button id="close-chat">✖</button>
+        <span>Asistente virtual</span>
     </div>
 
     <div id="chatbot-messages"></div>
 
     <div id="chatbot-input">
         <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
-        <button id="send-btn">➤</button>
+        <button id="send-btn">
+            <i class="fas fa-paper-plane"></i>
+        </button>
     </div>
 </div>
 
-<button id="chatbot-toggle">💬</button>
+<button id="chatbot-toggle">
+    <i class="fas fa-comment-dots"></i>
+</button>
 
-<!-- SCRIPT -->
+
+<!-- 🔥 SCRIPT MENÚ RESPONSIVE -->
+<script>
+const toggle = document.getElementById("menuToggle");
+const nav = document.getElementById("navLinks");
+
+toggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
+});
+</script>
+
+
+<!-- SCRIPTS -->
 <script src="js/app.js"></script>
 <script src="js/navbar.js"></script>
 <script src="js/chatbot.js"></script>

@@ -4,6 +4,7 @@
 body {
     background: #bad9ce;
     font-family: 'Segoe UI', sans-serif;
+    margin: 0;
 }
 
 
@@ -106,6 +107,19 @@ body {
 }
 
 
+/* ================= BADGE TALLAS ================= */
+
+.size-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #0E6973, #14a3b0);
+    color: white;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-top: 5px;
+}
+
+
 /* ================= BOTÓN TOGGLE ================= */
 
 .toggle-product-btn {
@@ -163,18 +177,16 @@ body {
     z-index: 1000;
 }
 
-/* oculto */
 .hidden {
     display: none;
 }
 
-/* contenido */
 .modal-content {
     background: white;
     padding: 25px;
     border-radius: 14px;
-    width: 320px;
-    max-width: 90%;
+    width: 400px;
+    max-width: 95%;
 
     display: flex;
     flex-direction: column;
@@ -185,13 +197,11 @@ body {
     animation: fadeIn 0.3s ease;
 }
 
-/* título */
 .modal-content h2 {
     margin: 0;
     text-align: center;
 }
 
-/* inputs generales */
 .modal-content input,
 .modal-content textarea,
 .modal-content select {
@@ -200,78 +210,68 @@ body {
     border-radius: 8px;
     outline: none;
     font-family: inherit;
+    width: 100%;
 }
 
-/* focus */
-.modal-content input:focus,
-.modal-content textarea:focus,
-.modal-content select:focus {
-    border-color: #3b8eea;
-}
-
-/* textarea */
 .modal-content textarea {
     resize: none;
     height: 80px;
 }
 
-/* select */
-.modal-content select {
-    background: white;
+
+/* ================= CHECKBOX ================= */
+
+.checkbox-group {
+    margin: 10px 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #333;
     cursor: pointer;
 }
 
-/* preview imagen */
+/* Checkbox moderno */
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #3b8eea; /* color bonito */
+}
+
+
+/* ================= IMAGEN PREVIEW ================= */
+
 .image-preview {
     width: 100%;
     height: 150px;
     object-fit: contain;
     border-radius: 8px;
     border: 1px solid #ddd;
-    margin-top: 5px;
 }
 
-/* botón guardar */
+
+/* ================= BOTONES MODAL ================= */
+
 .save-btn {
     background: #3b8eea;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: 0.3s;
 }
 
-.save-btn:hover {
-    background: #2f76c5;
-}
-
-/* botón cerrar */
 .close-btn {
     background: #ccc;
     border: none;
-    padding: 8px;
+    padding: 10px;
     border-radius: 8px;
     cursor: pointer;
-    transition: 0.2s;
-}
-
-.close-btn:hover {
-    background: #999;
-    color: white;
-}
-
-/* animación */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
 }
 
 
@@ -283,4 +283,79 @@ footer {
     padding: 20px;
     background: #222;
     color: white;
+}
+
+
+/* ===================================================== */
+/* 📱 RESPONSIVE */
+/* ===================================================== */
+
+/* 🔽 TABLET */
+@media (max-width: 900px){
+
+    .admin-header,
+    .admin-products{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .admin-actions{
+        justify-content: center;
+    }
+
+    .add-btn{
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .admin-products-grid{
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+
+/* 🔽 CELULAR */
+@media (max-width: 600px){
+
+    .admin-header h1{
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .admin-header p{
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .product-card{
+        padding: 15px;
+    }
+
+    .product-card img{
+        height: 150px;
+    }
+
+    .product-card h3{
+        font-size: 16px;
+    }
+
+    .product-card p{
+        font-size: 14px;
+    }
+
+    .toggle-product-btn{
+        width: 100%;
+        padding: 12px;
+    }
+
+    .modal-content{
+        width: 100%;
+        max-width: 95%;
+        padding: 20px;
+    }
+
+    .save-btn,
+    .close-btn{
+        width: 100%;
+    }
 }

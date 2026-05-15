@@ -1,11 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const BASE_URL = "http://192.168.100.2:5000";
+
     const cartItemsContainer = document.getElementById("cart-items");
     const totalEl = document.getElementById("cart-total");
     const checkoutBtn = document.getElementById("checkoutBtn");
 
     const token = localStorage.getItem("token");
 
+    // ===============================
+    // 🔐 VALIDACIÓN
+    // ===============================
     if (!token) {
         alert("Debes iniciar sesión");
         window.location.href = "login.html";
@@ -13,16 +18,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ===============================
-    // CARGAR CARRITO DESDE BACKEND
+    // 📦 CARGAR CARRITO
     // ===============================
     async function loadCart() {
         try {
 
-            const response = await fetch("http://127.0.0.1:5000/api/cart/", {
+            const response = await fetch(`${BASE_URL}/api/cart/`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
             });
+
+            if (!response.ok) {
+                throw new Error("Error al obtener carrito");
+            }
 
             const data = await response.json();
 
@@ -34,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ===============================
-    // RENDERIZAR CARRITO
+    // 🎨 RENDERIZAR
     // ===============================
     function renderCart(data) {
 
@@ -51,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const div = document.createElement("div");
             div.className = "cart-item";
 
+            // 🔥 INFO EXTRA
             let extraInfo = "";
 
             if (item.size) {
@@ -60,54 +70,60 @@ document.addEventListener("DOMContentLoaded", () => {
                 extraInfo = `<p><strong>Tipo:</strong> ${item.cup_type}</p>`;
             }
 
+            // 🔥 IMAGEN CORRECTA
+            let imageUrl = "";
+
+            if (item.image) {
+                imageUrl = item.image.startsWith("http")
+                    ? item.image
+                    : `${BASE_URL}/${item.image}`;
+            }
+
             div.innerHTML = `
+                ${imageUrl ? `<img src="${imageUrl}" alt="producto">` : ""}
+
                 <div class="cart-info">
 
-                    <h4>${item.name}</h4>
+                    <h3>${item.name}</h3>
 
                     ${extraInfo}
 
                     <p>Cantidad: ${item.quantity}</p>
-                    <p>Precio unitario: $${item.price.toFixed(2)}</p>
+                    <p>Precio: $${item.price.toFixed(2)}</p>
                     <p><strong>Subtotal: $${item.subtotal.toFixed(2)}</strong></p>
-
-                    ${item.image ? `
-                        <img src="http://127.0.0.1:5000/${item.image}" width="80">
-                    ` : ""}
 
                 </div>
 
-                <button class="remove-btn">
-                    ✕
-                </button>
+                <button class="remove-btn">✕</button>
             `;
 
-            const removeBtn = div.querySelector(".remove-btn");
-
-            removeBtn.addEventListener("click", () => {
-                removeItem(item.id);
-            });
+            // 🔥 ELIMINAR ITEM
+            div.querySelector(".remove-btn")
+                .addEventListener("click", () => removeItem(item.id));
 
             cartItemsContainer.appendChild(div);
-
         });
 
         totalEl.textContent = `$${data.total.toFixed(2)}`;
     }
 
     // ===============================
-    // ELIMINAR ITEM
+    // ❌ ELIMINAR ITEM
     // ===============================
     async function removeItem(id) {
 
         try {
 
-            await fetch(`http://127.0.0.1:5000/api/cart/${id}`, {
+            const response = await fetch(`${BASE_URL}/api/cart/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
             });
+
+            if (!response.ok) {
+                throw new Error("Error al eliminar");
+            }
 
             loadCart();
 
@@ -117,15 +133,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ===============================
-    // IR A CHECKOUT
+    // 🧾 CHECKOUT
     // ===============================
     checkoutBtn?.addEventListener("click", () => {
         window.location.href = "checkout.html";
     });
 
     // ===============================
-    // INICIAR
+    // 🚀 INIT
     // ===============================
     loadCart();
-
 });

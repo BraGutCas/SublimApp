@@ -29,32 +29,40 @@ def get_products():
 @jwt_required()
 def add_product():
     try:
-        print(request.form)
+        # Captura de datos del formulario
         name = request.form.get("name")
         description = request.form.get("description") or ""
         price = request.form.get("price")
         category = request.form.get("category") or "General"
+        options = request.form.get("options") or "" # Captura las opciones del admin
+        
         image = request.files.get("image")
 
+        # Validación básica
         if not name or not price:
-            return jsonify({"error": "Faltan datos"}), 400
+            return jsonify({"error": "Faltan datos obligatorios (nombre o precio)"}), 400
 
+        # Manejo de la imagen
         image_url = None
-
         if image:
             filename = f"{uuid.uuid4()}_{secure_filename(image.filename)}"
             filepath = os.path.join(UPLOAD_FOLDER, filename)
             image.save(filepath)
+            image_url = f"/uploads/{filename}"
 
-            image_url = f"http://127.0.0.1:5000/uploads/{filename}"
+        # Lógica automática para has_sizes
+        # Si el administrador escribió algo en opciones, marcamos has_sizes como True
+        has_sizes_bool = True if options.strip() else False
 
-        # 🔥 CREAR PRODUCTO COMPLETO
+        # 🔥 CREAR PRODUCTO EN LA BASE DE DATOS
         product = Product(
             name=name,
             description=description,
             price=float(price),
             image_url=image_url,
             category=category,
+            options=options,
+            has_sizes=has_sizes_bool,
             is_active=True
         )
 
@@ -64,7 +72,9 @@ def add_product():
         return jsonify(product.to_dict()), 201
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        db.session.rollback()
+        print(f"Error al agregar producto: {str(e)}")
+        return jsonify({"error": "Error interno del servidor"}), 500
 
 
 # =========================
@@ -79,7 +89,7 @@ def toggle_product(id):
     db.session.commit()
 
     return jsonify({
-        "message": "Producto actualizado",
+        "message": "Estado del producto actualizado",
         "is_active": product.is_active
     })
 

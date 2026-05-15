@@ -1,27 +1,45 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // =====================================
-    // MOSTRAR ALERT SI VIENE DE CHECKOUT
+    // 🍔 MENU HAMBURGUESA
+    // =====================================
+    const toggleBtn = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    if (toggleBtn && navLinks) {
+        toggleBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+
+        // cerrar menú al hacer click en link
+        document.querySelectorAll("#nav-links a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+            });
+        });
+    }
+
+    // =====================================
+    // 🎉 ALERT DE CHECKOUT
     // =====================================
     if (localStorage.getItem("orderSuccess")) {
-
         alert("🎉 Pedido completado con éxito");
-
         localStorage.removeItem("orderSuccess");
     }
 
+    // =====================================
+    // 👤 USER SECTION
+    // =====================================
     const userSection = document.getElementById("user-section");
 
-    // Si la página no tiene navbar, no hacer nada
     if (!userSection) return;
 
     const user = JSON.parse(localStorage.getItem("user"));
 
     // =====================================
-    // SI NO HAY USUARIO
+    // ❌ SIN USUARIO
     // =====================================
     if (!user) {
-
         userSection.innerHTML = `
             <a href="login.html" class="login-btn">Login</a>
         `;
@@ -29,13 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =====================================
-    // OBTENER NOMBRE DE USUARIO
+    // 👤 NOMBRE E INICIALES
     // =====================================
     const userName = user.name || user.username || "Usuario";
 
-    // =====================================
-    // OBTENER INICIALES
-    // =====================================
     const initials = userName
         .split(" ")
         .map(n => n[0])
@@ -43,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .toUpperCase();
 
     // =====================================
-    // CREAR MENÚ DE USUARIO
+    // 🎨 RENDER USER
     // =====================================
     userSection.innerHTML = `
         <div class="user-wrapper">
@@ -72,35 +87,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoutBtn = document.getElementById("logout");
 
     // =====================================
-    // ABRIR / CERRAR MENÚ
+    // 🔽 TOGGLE USER MENU
     // =====================================
-    avatar.addEventListener("click", (e) => {
-
+    avatar?.addEventListener("click", (e) => {
         e.stopPropagation();
-
-        menu.style.display =
-            menu.style.display === "block" ? "none" : "block";
+        menu.classList.toggle("active");
     });
 
     // =====================================
-    // CERRAR MENÚ SI SE HACE CLICK FUERA
+    // ❌ CERRAR MENU USER
     // =====================================
-    document.addEventListener("click", () => {
-
-        if (menu) {
-            menu.style.display = "none";
+    document.addEventListener("click", (e) => {
+        if (menu && avatar && !menu.contains(e.target) && !avatar.contains(e.target)) {
+            menu.classList.remove("active");
         }
-
     });
 
     // =====================================
-    // LOGOUT
+    // 🚪 LOGOUT
     // =====================================
-    logoutBtn.addEventListener("click", () => {
-
+    logoutBtn?.addEventListener("click", () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-
         window.location.href = "index.html";
     });
 

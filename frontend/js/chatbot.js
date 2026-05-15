@@ -1,4 +1,9 @@
 // ==============================
+// 🌐 CONFIGURACIÓN API
+// ==============================
+const API_URL = "http://192.168.100.2:7000/predict";
+
+// ==============================
 // 📌 ELEMENTOS DEL DOM
 // ==============================
 const chatMessages = document.getElementById("chatbot-messages");
@@ -46,11 +51,10 @@ function removeTypingIndicator() {
 }
 
 // ==============================
-// 🚀 ENVIAR MENSAJE
+// 🚀 ENVIAR MENSAJE (CORREGIDO)
 // ==============================
 async function sendMessage() {
     const message = chatInput.value.trim();
-    console.log("ENVIANDO:", message);
     if (!message) return;
 
     addMessage("Tú", message);
@@ -58,28 +62,50 @@ async function sendMessage() {
 
     showTypingIndicator();
 
+    // ⏱️ Creamos un controlador para abortar si tarda demasiado (Timeout)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 segundos
+
     try {
-        const response = await fetch("http://127.0.0.1:7000/predict", {
+        const response = await fetch(API_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ message })
+            body: JSON.stringify({ message }),
+            signal: controller.signal // Conectamos el timeout
         });
 
-        const data = await response.json();
-        removeTypingIndicator();
+        clearTimeout(timeoutId); // Limpiar el timer si respondió a tiempo
+
+        let data;
+        try {
+            data = await response.json();
+        } catch {
+            throw new Error("Respuesta inválida del servidor");
+        }
 
         if (!response.ok) {
             throw new Error(data.response || "Error del servidor");
         }
 
-        addMessage("Bot", data.response);
+        addMessage("Bot", data.response || "Sin respuesta 🤖");
 
     } catch (error) {
+        console.error("ERROR FETCH:", error);
+        
+        let errorMsg = "No se pudo conectar con el servidor 🤖❌ Inténtalo más tarde";
+        
+        if (error.name === 'AbortError') {
+            errorMsg = "El servidor tardó demasiado en responder 🤖⏳";
+        }
+        
+        addMessage("Bot", errorMsg);
+    } finally {
+        // ✅ IMPORTANTE: Esto se ejecuta SIEMPRE, ya sea que funcione o falle
+        // Así aseguramos que desaparezca el "Escribiendo..." en el celular
         removeTypingIndicator();
-        addMessage("Bot", "No se pudo conectar con el servidor 🤖❌");
-        console.error(error);
+        clearTimeout(timeoutId);
     }
 }
 

@@ -1,85 +1,120 @@
-const API_URL = "http://127.0.0.1:5000/api/products/";
-const CART_API = "http://127.0.0.1:5000/api/cart/add";
+// ==============================
+// 🌐 CONFIGURACIÓN API
+// ==============================
+const BASE_URL = "http://192.168.100.2:5000";
+const PRODUCTS_URL = `${BASE_URL}/api/products/`;
+const CART_API = `${BASE_URL}/api/cart/add`;
+
+function guardarTiempo(tipo, tiempo) {
+    const tiempos = JSON.parse(localStorage.getItem("metricas")) || [];
+
+    tiempos.push({
+        tipo: tipo,
+        tiempo: parseFloat(tiempo),
+        fecha: new Date().toLocaleTimeString()
+    });
+
+    localStorage.setItem("metricas", JSON.stringify(tiempos));
+}
+
+function verMetricas() {
+    const tiempos = JSON.parse(localStorage.getItem("metricas")) || [];
+
+    if (tiempos.length === 0) {
+        console.log("No hay métricas aún");
+        return;
+    }
+
+    console.table(tiempos);
+}
+
+function promedio(tipo) {
+    const tiempos = JSON.parse(localStorage.getItem("metricas")) || [];
+
+    const filtrados = tiempos.filter(t => t.tipo === tipo);
+
+    if (filtrados.length === 0) return;
+
+    const suma = filtrados.reduce((acc, t) => acc + t.tiempo, 0);
+    const prom = (suma / filtrados.length).toFixed(2);
+
+    console.log(`Promedio ${tipo}:`, prom, "ms");
+}
+
+// Guardamos los productos localmente para no saturar la API
+let allProducts = [];
 
 // ======================================================
-// MOSTRAR PRODUCTOS
+// 🚀 INICIALIZAR APP
 // ======================================================
-initializeApp();
-
-// ======================================================
-// FUNCIÓN PRINCIPAL
-// ======================================================
-
-function initializeApp() {
-
+document.addEventListener("DOMContentLoaded", () => {
     loadProducts();
-
-}
-
+});
 
 // ======================================================
-// CARGAR PRODUCTOS
+// 📦 CARGAR PRODUCTOS
 // ======================================================
+async function loadProducts() {
+    try {
+        const start = performance.now(); // ⏱️ INICIO
+        const response = await fetch(PRODUCTS_URL);
+        if (!response.ok) throw new Error("Error al obtener productos");
 
-function loadProducts() {
+        const data = await response.json();
+        allProducts = data; // Guardamos en memoria
 
-    fetch(API_URL)
-        .then(response => response.json())
-        .then(data => {
+        const container = document.getElementById("products");
+        if (!container) return;
 
-            const container = document.getElementById("products");
-            if (!container) return;
+        container.innerHTML = "";
 
-            container.innerHTML = "";
+        data.forEach(product => {
+            let imageUrl = "img/no-image.jpg";
+            if (product.image_url) {
+                imageUrl = product.image_url.startsWith("http")
+                    ? product.image_url
+                    : `${BASE_URL}${product.image_url}`;
+            }
 
-            data.forEach(product => {
+            const card = document.createElement("div");
+            card.className = `product-card ${!product.is_active ? "inactive" : ""}`;
 
-                const card = document.createElement("div");
+            card.innerHTML = `
+                <img src="${imageUrl}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.description || ""}</p>
+                <p class="price">$${product.price}</p>
+                <p><small>${product.category}</small></p>
 
-                card.className = `product-card ${!product.is_active ? "inactive" : ""}`;
-
-                card.innerHTML = `
-                    <img 
-                        src="${product.image_url || 'img/no-image.jpg'}" 
-                        alt="${product.name}"
-                    >
-                    <h3>${product.name}</h3>
-                    <p>${product.description}</p>
-                    <p class="price">$${product.price}</p>
-                    <p><small>${product.category}</small></p>
-
-                    ${
-                        product.is_active
-                        ? `<button class="custom-btn">
-                                Personalizar
-                           </button>`
-                        : `<button class="custom-btn" disabled 
-                                 style="background:#ccc; cursor:not-allowed;">
-                                Sin existencias
-                           </button>`
-                    }
-                `;
-
-                if (product.is_active) {
-                    card.querySelector(".custom-btn")
-                        .addEventListener("click", () => {
-                            openModal(product.id, product.category);
-                        });
+                ${product.is_active
+                    ? `<button class="custom-btn">Personalizar</button>`
+                    : `<button class="custom-btn" disabled style="background:#ccc; cursor:not-allowed;">Sin existencias</button>`
                 }
+            `;
 
-                container.appendChild(card);
-            });
-        })
-        .catch(error => {
-            console.error("Error al cargar productos:", error);
+            if (product.is_active) {
+                card.querySelector(".custom-btn").addEventListener("click", () => {
+                    openModal(product.id);
+                });
+            }
+
+            container.appendChild(card);
         });
+
+        const end = performance.now();
+        const tiempo = (end - start).toFixed(2);
+
+        console.log("⏱️ Tiempo productos:", tiempo, "ms");
+        guardarTiempo("Carga de productos", tiempo);
+
+    } catch (error) {
+        console.error("Error al cargar productos:", error);
+    }
 }
 
-
 // ======================================================
-// MODAL
+// 🪟 MODAL DINÁMICO
 // ======================================================
-
 const modal = document.getElementById("customModal");
 const confirmBtn = document.getElementById("confirmAddBtn");
 const cancelBtn = document.getElementById("cancelModalBtn");
@@ -87,55 +122,51 @@ const cancelBtn = document.getElementById("cancelModalBtn");
 let selectedProductId = null;
 let selectedCategory = null;
 
-function openModal(productId, category) {
+function openModal(productId) {
+    // Buscamos el producto en nuestra lista local
+    const product = allProducts.find(p => p.id === productId);
+    if (!product) return;
 
     selectedProductId = productId;
-    selectedCategory = category;
+    selectedCategory = product.category;
 
     const optionsDiv = document.getElementById("product-options");
+    optionsDiv.innerHTML = ""; // Limpiar modal
 
-    if (category === "playera") {
+    // 🔥 LÓGICA DINÁMICA DE OPCIONES (Tallas, Colores, etc.)
+    if (product.options && product.options.trim() !== "") {
+        // Convertimos el string "S, M, L, XL" en un array
+        const optionsArray = product.options.split(',').map(opt => opt.trim());
+
+        // Definimos el ID del select dependiendo de la categoría para no romper el carrito
+        let selectId = (product.category === "playera") ? "modal-size" : "modal-cupType";
+        let labelName = (product.category === "playera") ? "Talla:" : "Opción:";
+
         optionsDiv.innerHTML = `
-            <label>Talla:</label>
-            <select id="modal-size">
-                <option value="">Selecciona talla</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
+            <label>${labelName}</label>
+            <select id="${selectId}">
+                <option value="">Selecciona una opción</option>
+                ${optionsArray.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
             </select>
         `;
-    } 
-    else if (category === "taza") {
-        optionsDiv.innerHTML = `
-            <label>Tipo de taza:</label>
-            <select id="modal-cupType">
-                <option value="">Selecciona tipo</option>
-                <option value="blanca">Taza blanca</option>
-                <option value="magica">Taza mágica</option>
-            </select>
-        `;
-    } 
-    else {
-        optionsDiv.innerHTML = "";
     }
 
     modal.style.display = "flex";
 }
 
+// CERRAR MODAL
 cancelBtn?.addEventListener("click", () => {
     modal.style.display = "none";
 });
 
-confirmBtn?.addEventListener("click", () => {
-    addToCartWithImages();
-});
-
+// CONFIRMAR
+confirmBtn?.addEventListener("click", addToCartWithImages);
 
 // ======================================================
-// AGREGAR AL CARRITO
+// 🛒 AGREGAR AL CARRITO
 // ======================================================
-
 async function addToCartWithImages() {
+    const start = performance.now(); // ⏱️ INICIO
 
     const token = localStorage.getItem("token");
 
@@ -146,29 +177,22 @@ async function addToCartWithImages() {
     }
 
     const images = document.getElementById("modal-images").files;
-
     if (!images.length) {
         alert("Debes subir al menos una imagen");
         return;
     }
 
-    let size = null;
-    let cupType = null;
+    const size = document.getElementById("modal-size")?.value;
+    const cupType = document.getElementById("modal-cupType")?.value;
 
-    if (selectedCategory === "playera") {
-        size = document.getElementById("modal-size")?.value;
-        if (!size) {
-            alert("Debes seleccionar una talla");
-            return;
-        }
+    // Validación según categoría
+    if (selectedCategory === "playera" && !size) {
+        alert("Debes seleccionar una talla");
+        return;
     }
-
-    if (selectedCategory === "taza") {
-        cupType = document.getElementById("modal-cupType")?.value;
-        if (!cupType) {
-            alert("Debes seleccionar el tipo de taza");
-            return;
-        }
+    if (selectedCategory === "taza" && !cupType) {
+        alert("Debes seleccionar el tipo de taza");
+        return;
     }
 
     const formData = new FormData();
@@ -191,16 +215,21 @@ async function addToCartWithImages() {
             body: formData
         });
 
-        if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.error || "Error al agregar");
-        }
+        const data = await response.json();
+
+        if (!response.ok) throw new Error(data.error || "Error al agregar");
 
         alert("Producto agregado al carrito 🛒");
         modal.style.display = "none";
 
+        const end = performance.now();
+        const tiempo = (end - start).toFixed(2);
+
+        console.log("⏱️ Tiempo agregar carrito:", tiempo, "ms");
+        guardarTiempo("Carga agregar al carrito", tiempo);
+
     } catch (error) {
-        console.error(error);
+        console.error("ERROR CART:", error);
         alert(error.message);
     }
 }

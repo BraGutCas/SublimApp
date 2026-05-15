@@ -3,58 +3,61 @@
 
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin | Productos</title>
 
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/admin-products.css">
-
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- ================= NAVBAR ================= -->
 <nav class="navbar">
 
-<div class="logo">
-    <img src="assets/logo.png" alt="Logo">
-</div>
+    <div class="logo">
+        <img src="assets/logo.png" alt="Logo">
+    </div>
 
-<div class="nav-links">
-    <a href="admin-orders.html">Pedidos</a>
-    <div id="user-section"></div>
-</div>
+    <!-- BOTÓN HAMBURGUESA -->
+    <div class="menu-toggle" id="menu-toggle">
+        ☰
+    </div>
+
+    <div class="nav-links" id="nav-links">
+        <a href="admin-orders.html">Pedidos</a>
+        <div id="user-section"></div>
+    </div>
 
 </nav>
 
 
-<!-- HEADER ADMIN -->
+<!-- ================= HEADER ================= -->
 <section class="admin-header">
-
-<h1>Panel de Productos</h1>
-<p>Gestiona los productos de tu tienda</p>
-
+    <h1>Panel de Productos</h1>
+    <p>Gestiona los productos de tu tienda</p>
 </section>
 
 
-<!-- CONTENIDO -->
+<!-- ================= CONTENIDO ================= -->
 <section class="admin-products">
 
-<div class="admin-actions">
-    <button id="addProductBtn" class="add-btn">
-        + Agregar producto
-    </button>
-</div>
+    <div class="admin-actions">
+        <button id="addProductBtn" class="add-btn">
+            + Agregar producto
+        </button>
+    </div>
 
-<!-- GRID DE PRODUCTOS -->
-<div id="products" class="admin-products-grid"></div>
+    <div id="products" class="admin-products-grid"></div>
 
 </section>
 
 
-<!-- 🧾 MODAL AGREGAR PRODUCTO -->
+<!-- ================= MODAL ================= -->
 <div id="productModal" class="modal hidden">
 
     <div class="modal-content">
+
         <h2>Agregar Producto</h2>
 
         <form id="product-form" enctype="multipart/form-data">
@@ -87,15 +90,34 @@
                 type="text" 
                 id="category" 
                 list="categories-list"
-                placeholder="Categoría (puedes escribir una nueva)"
+                placeholder="Categoría"
                 required
             >
 
             <datalist id="categories-list">
-                <option value="Tazas">
-                <option value="Playeras">
-                <option value="Láminas">
+                <option value="playera">
+                <option value="lamina">
+                <option value="taza">
             </datalist>
+
+
+            <!-- 🔥 OPCIONES DINÁMICAS -->
+            <div class="options-group">
+                <label for="optionsInput">
+                    Opciones (tallas, tipos, etc.)
+                </label>
+
+                <input 
+                    type="text" 
+                    id="optionsInput" 
+                    placeholder="Ej: S,M,L,XL o Grande,Mediano,Chico"
+                >
+
+                <small class="hint">
+                    Separa cada opción con coma (opcional)
+                </small>
+            </div>
+
 
             <!-- IMAGEN -->
             <input 
@@ -107,9 +129,10 @@
             <!-- PREVIEW -->
             <img id="imagePreview" class="image-preview hidden">
 
+
             <!-- BOTÓN -->
             <button type="submit" class="save-btn">
-                Guardar
+                Guardar producto
             </button>
 
         </form>
@@ -117,21 +140,23 @@
         <button id="closeModal" class="close-btn">
             Cerrar
         </button>
+
     </div>
 
 </div>
 
 
-<!-- FOOTER -->
-<footer>
-<p>© 2026 Sublimados App - Admin</p>
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>© 2026 SublimApp - Admin</p>
+    </div>
 </footer>
 
 
-<!-- SCRIPTS -->
+<!-- ================= SCRIPTS ================= -->
 <script src="js/navbar.js"></script>
 <script src="js/admin-products.js"></script>
 
 </body>
-
 </html>

@@ -6,6 +6,10 @@ from flask_jwt_extended import JWTManager
 from datetime import timedelta
 import os
 
+# 📁 BASE DEL PROYECTO
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOADS_DIR = os.path.join(BASE_DIR, "uploads")
+
 
 def create_app():
     app = Flask(__name__)
@@ -13,17 +17,23 @@ def create_app():
 
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=24)
 
-    # 🔐 JWT CONFIG
+    # 🔐 JWT
     JWTManager(app)
 
-    # 🌐 CORS
-    CORS(app)
+    # 🌐 CORS (🔥 CORREGIDO)
+    CORS(
+        app,
+        resources={r"/api/*": {"origins": "*"}},
+        allow_headers=["Content-Type", "Authorization"],
+        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        supports_credentials=True
+    )
 
     # 🗄️ DB
     db.init_app(app)
 
-    # 📁 Crear carpeta uploads si no existe
-    os.makedirs("uploads", exist_ok=True)
+    # 📁 Crear carpeta uploads
+    os.makedirs(UPLOADS_DIR, exist_ok=True)
 
     # 🔹 IMPORTAR MODELOS
     from models.user import User
@@ -32,7 +42,7 @@ def create_app():
     from models.order_item import OrderItem
     from models.cart import CartItem
 
-    # 🔹 IMPORTAR Y REGISTRAR RUTAS
+    # 🔹 IMPORTAR BLUEPRINTS
     from routes.auth import auth_bp
     from routes.products import products_bp
     from routes.orders import orders_bp
@@ -46,21 +56,22 @@ def create_app():
     app.register_blueprint(cart_bp)
 
     # =========================
-    # SERVIR IMÁGENES UPLOADS
+    # 🖼️ SERVIR IMÁGENES
     # =========================
     @app.route("/uploads/<path:filename>")
     def serve_uploads(filename):
-        return send_from_directory(
-            os.path.join(os.getcwd(), "uploads"),
-            filename
-        )
+        return send_from_directory(UPLOADS_DIR, filename)
 
-    # 🔹 HOME
+    # =========================
+    # 🏠 HOME
+    # =========================
     @app.route("/")
     def home():
-        return jsonify({"message": "API funcionando correctamente"})
+        return jsonify({"message": "API funcionando correctamente 🚀"})
 
-    # 🧱 Crear tablas
+    # =========================
+    # 🧱 CREAR TABLAS
+    # =========================
     with app.app_context():
         db.create_all()
 
@@ -70,4 +81,4 @@ def create_app():
 app = create_app()
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

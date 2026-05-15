@@ -1,143 +1,218 @@
+/* ========================= */
+/* GENERAL */
+/* ========================= */
+
 body{
-margin:0;
-padding:0;
-min-height:100vh;
-background:#bad9ce;
-font-family: Arial;
-color:rgb(0, 0, 0);
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background:#bad9ce;
+    font-family: Arial, sans-serif;
+    color:#000;
 }
 
+/* ========================= */
+/* CONTENEDOR */
+/* ========================= */
+
 .cart-wrapper{
-max-width:1200px;
-margin:auto;
-padding:40px 20px;
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
 }
 
 .cart-wrapper h1{
-text-align:center;
-margin-bottom:40px;
-color:#0E6973;
+    text-align:center;
+    margin-bottom:40px;
+    color:#0E6973;
 }
 
-
-
-#logout{
-    width:100%;
-    border:none;
-    background:#ff4d4d;
-    color:white;
-    padding:8px;
-    border-radius:6px;
-    cursor:pointer;
-}
-
+/* ========================= */
 /* GRID PRINCIPAL */
+/* ========================= */
 
 .cart-layout{
-display:grid;
-grid-template-columns: 1fr 300px;
-gap:40px;
+    display:grid;
+    grid-template-columns: 1fr 320px;
+    gap:40px;
+    align-items:start;
 }
 
+/* ========================= */
 /* PRODUCTOS */
+/* ========================= */
 
-#cart-items{
-display:flex;
-flex-direction:column;
-gap:20px;
+.cart-items{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
 }
 
+/* ========================= */
 /* TARJETA PRODUCTO */
+/* ========================= */
 
 .cart-item{
-display:flex;
-align-items:center;
-background:#ffffff;
-color:#0E6973;
-padding:15px;
-border-radius:10px;
-gap:15px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    display:flex;
+    align-items:center;
+    background:#ffffff;
+    color:#0E6973;
+    padding:15px;
+    border-radius:12px;
+    gap:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transition:0.2s;
 }
 
+.cart-item:hover{
+    transform:translateY(-2px);
+}
+
+/* ========================= */
 /* IMAGEN */
+/* ========================= */
 
 .cart-item img{
-width:70px;
-height:70px;
-object-fit:cover;
-border-radius:8px;
+    width:80px;
+    height:80px;
+    object-fit:cover;
+    border-radius:10px;
 }
 
+/* ========================= */
 /* INFO */
+/* ========================= */
 
 .cart-info{
-flex:1;
+    flex:1;
 }
 
 .cart-info h3{
-margin:0;
-font-size:16px;
-color:#575757;
+    margin:0;
+    font-size:16px;
+    color:#575757;
 }
 
 .cart-info p{
-margin:4px 0;
-font-size:18px;
-color:#4b4b4b;
+    margin:4px 0;
+    font-size:15px;
+    color:#4b4b4b;
 }
 
-
+/* ========================= */
 /* RESUMEN */
+/* ========================= */
 
 .cart-summary{
-background:#ffffff;
-color:#0E6973;
-padding:25px;
-border-radius:10px;
-height:fit-content;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    background:#ffffff;
+    color:#0E6973;
+    padding:25px;
+    border-radius:12px;
+    height:fit-content;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+    position:sticky;
+    top:90px;
 }
 
 .cart-summary h2{
-margin-top:0;
-color:#0E6973;
+    margin-top:0;
 }
 
+/* ========================= */
 /* TOTAL */
+/* ========================= */
 
 .total-row{
-display:flex;
-justify-content:space-between;
-font-size:20px;
-margin:20px 0;
+    display:flex;
+    justify-content:space-between;
+    font-size:20px;
+    margin:20px 0;
 }
 
+/* ========================= */
 /* BOTON */
+/* ========================= */
 
 .checkout-btn{
-width:100%;
-padding:14px;
-border:none;
-background:#f2bb16;
-color:rgb(0, 0, 0);
-font-size:16px;
-border-radius:6px;
-cursor:pointer;
-transition:0.2s;
+    width:100%;
+    padding:14px;
+    border:none;
+    background:#f2bb16;
+    color:#000;
+    font-size:16px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.2s;
 }
 
 .checkout-btn:hover{
-background:#0E6973;
-color: #ffffff;
+    background:#0E6973;
+    color:#fff;
 }
 
+/* ========================= */
 /* FOOTER */
+/* ========================= */
 
 footer{
-text-align:center;
-padding:20px;
-background:#222;
-color:white;
+    text-align:center;
+    padding:20px;
+    background:#222;
+    color:white;
 }
 
+/* ===================================================== */
+/* 📱 RESPONSIVE */
+/* ===================================================== */
+
+/* 🔽 TABLET */
+@media (max-width: 900px){
+
+    .cart-layout{
+        grid-template-columns: 1fr;
+    }
+
+    .cart-summary{
+        position:relative;
+        top:0;
+        margin-top:20px;
+    }
+}
+
+/* 🔽 CELULAR */
+@media (max-width: 600px){
+
+    .cart-wrapper{
+        padding:20px 10px;
+    }
+
+    /* 🔥 TARJETA EN VERTICAL */
+    .cart-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .cart-item img{
+        width:100%;
+        height:auto;
+        max-height:200px;
+    }
+
+    .cart-info h3{
+        font-size:15px;
+    }
+
+    .cart-info p{
+        font-size:14px;
+    }
+
+    .total-row{
+        font-size:18px;
+    }
+
+    .checkout-btn{
+        font-size:18px;
+        padding:16px;
+    }
+}

@@ -1,198 +1,125 @@
 {
   "intents": [
-
     {
       "tag": "saludo",
       "patterns": [
-        "hola", "holaa", "hola buenas", "hola que tal", "buenas",
-        "buenos dias", "buenas tardes", "buenas noches",
-        "que tal", "hey", "hi", "hello"
+        "hola", "holaa", "hola buenas", "hola que tal", "buenas", "buen dia",
+        "buenos dias", "buenas tardes", "buenas noches", "que tal", "hey", "hi", 
+        "hello", "que onda", "onda", "que hay", "saludos", "que tal todo", 
+        "hablar con alguien", "hay alguien ahí", "hola bot", "oie hola"
       ],
       "responses": [
         "¡Hola! 😊 ¿En qué puedo ayudarte?",
-        "¡Buenas! 👋 ¿Qué te gustaría ver hoy?",
-        "¡Hola! 🛍️ Puedo ayudarte con productos, precios o pedidos.",
-        "¡Hola! 😄 ¿Buscas algo en especial?"
+        "¡Buenas! 👋 ¿Qué te gustaría ver hoy?"
       ]
     },
-
     {
       "tag": "ver_productos",
       "patterns": [
-        "ver productos", "quiero ver productos", "productos",
-        "mostrar productos", "mostrar", "ver", "catalogo",
-        "ver catalogo", "que tienes", "que vendes",
-        "productos disponibles", "que hay", "ver cosas",
-        "cosas", "kiero ver productos", "kiero ber productos",
-        "ber productos", "muestrame productos",
-        "enseñame productos", "que tienes disponible",
-        "show me products", "products", "what do you sell"
+        "productos", "catalogo", "que vendes", "muestrame", "ver", "stock",
+        "que hay", "existencias", "lista", "inventario", "ver todo", "cosas",
+        "que tienes", "que modelos hay", "muestrame el catalogo"
       ],
       "responses": [
-        "🛍️ Tenemos:\n- Tazas personalizadas ☕\n- Playeras sublimadas 👕\n- Láminas decorativas 🖼️",
-        "Aquí puedes encontrar:\n☕ Tazas\n👕 Playeras\n🖼️ Láminas decorativas",
-        "Tenemos varios productos personalizados:\n- Tazas\n- Playeras\n- Láminas",
-        "Puedes explorar nuestro catálogo con tazas, playeras y láminas 🛍️"
+        "🛍️ Tenemos:\n- Tazas personalizadas ☕\n- Playeras sublimadas 👕\n- Láminas decorativas 🖼️"
       ]
     },
-
     {
       "tag": "precio",
       "patterns": [
-        "precio", "precios", "cuanto cuesta", "cuanto vale",
-        "precio de la taza", "cuanto cuesta la taza",
-        "precio de tazas", "cuanto cuesta una playera",
-        "precio de playeras", "cuanto cuesta una lamina",
-        "precio de laminas", "cuanto cuestan los productos",
-        "precio de productos", "cuanto cobran",
-        "presio", "cuanto sale"
+        "precio", "precios", "cuanto cuesta", "cuanto vale", "costo", "costos", 
+        "valor", "cuanto cobran", "presio", "cuanto sale", "tarifas", "en cuanto sale",
+        "que precio tiene todo", "lista de precios", "cuanto dinero", "cuanto pides",
+        "presupuesto", "cotizacion", "cuanto seria", "que costo tiene"
       ],
       "responses": [
-        "💰 Los precios son:\n- Tazas: $100\n- Playeras: $200\n- Láminas: $150",
-        "Nuestros precios base son:\n☕ Tazas $100\n👕 Playeras $200\n🖼️ Láminas $150",
-        "El costo depende del producto:\n- Tazas desde $100\n- Playeras desde $200\n- Láminas desde $150",
-        "💵 Manejo de precios:\nTazas: $100\nPlayeras: $200\nLáminas: $150"
+        "💰 Los precios son:\n- Tazas: $100\n- Playeras: $200\n- Láminas: $150"
       ]
     },
-
     {
       "tag": "producto_taza",
       "patterns": [
-        "taza", "tazas", "quiero una taza", "dame una taza",
-        "quiero taza", "busco una taza", "necesito una taza",
-        "taza personalizada", "taza con foto", "taza con nombre",
-        "taza con frase", "me interesa una taza",
-        "kiero taza", "tasa"
+        "taza", "tazas", "quiero una taza", "dame una taza", "quiero taza", 
+        "busco una taza", "necesito una taza", "taza personalizada", "taza con foto", 
+        "taza con nombre", "taza con frase", "me interesa una taza", "comprar tazas",
+        "tasa", "tazita", "tazota", "mug", "pocillo", "taza para cafe", "mug para cafe",
+        "quiero ver las tazas", "enseñame las tazas", "ver diseños de tazas"
       ],
       "responses": [
-        "Tenemos tazas personalizadas con foto, nombre o frase ☕",
-        "Las tazas son totalmente personalizables con tu diseño favorito 😊",
-        "Puedes crear una taza única con imagen, texto o nombre ☕",
-        "Nuestras tazas son ideales para regalo y completamente personalizables 🎁"
+        "Tenemos tazas personalizadas con foto, nombre o frase ☕"
       ]
     },
-
     {
       "tag": "producto_playera",
       "patterns": [
-        "playera", "playeras", "quiero una playera",
-        "dame una playera", "camiseta", "camisetas",
-        "playera personalizada", "camiseta personalizada",
-        "playera con diseño", "kiero playera"
+        "playera", "playeras", "quiero una playera", "dame una playera", "camiseta", 
+        "camisetas", "playera personalizada", "camiseta personalizada", "playera con diseño", 
+        "remera", "remeras", "polera", "camisa", "t-shirt", "ropa", "prendas",
+        "playeritas", "jerseys", "busco una remera", "estampar una camisa",
+        "t-shirt sublimada", "camisas con mi diseño", "quiero ver las playeras"
       ],
       "responses": [
-        "Manejamos playeras sublimadas de excelente calidad 👕",
-        "Puedes personalizar tu playera con cualquier diseño 👕",
-        "Nuestras playeras son cómodas y personalizables 😊",
-        "Tenemos playeras ideales para cualquier ocasión 👕"
+        "Manejamos playeras sublimadas de excelente calidad 👕"
       ]
     },
-
     {
       "tag": "producto_lamina",
       "patterns": [
-        "lamina", "laminas", "cuadro", "poster",
-        "lamina decorativa", "cuadro decorativo",
-        "decoracion", "decoracion hogar",
-        "lamina personalizada"
+        "lamina", "laminas", "cuadro", "poster", "lamina decorativa", "cuadro decorativo",
+        "decoracion", "decoracion hogar", "dibujo", "lamina personalizada", "cuadros", 
+        "posters", "impresion", "arte", "pared", "decorar", "imprimir foto", "foto en cuadro",
+        "póster", "lienzos", "canvas", "cuadros decorativos para pared", "enseñame los cuadros"
       ],
       "responses": [
-        "Las láminas decorativas son ideales para hogar u oficina 🖼️",
-        "Puedes decorar tus espacios con nuestras láminas personalizadas 🖼️",
-        "Tenemos láminas con diseños únicos para tu hogar 😊",
-        "Las láminas son perfectas para darle estilo a tu espacio ✨"
+        "Las láminas decorativas son ideales para hogar u oficina 🖼️"
       ]
     },
-
     {
       "tag": "carrito",
       "patterns": [
-        "agregar", "agregar al carrito", "agregar producto",
-        "agregar taza", "comprar", "quiero comprar",
-        "comprar taza", "añadir", "añadir al carrito",
-        "meter al carrito", "agregar producto al carrito",
-        "komprar", "comprar algo"
+        "agregar", "agregar al carrito", "agregar producto", "comprar", "quiero comprar", 
+        "añadir", "añadir al carrito", "meter al carrito", "al carrito", "añadir a la canasta",
+        "poner en el carrito", "lo quiero comprar", "finalizar compra", "pagar", "ordenar ahora"
       ],
       "responses": [
-        "🛒 Para comprar, selecciona tu producto y presiona 'Agregar al carrito'.",
-        "Puedes agregar productos desde el catálogo usando el botón 🛒",
-        "Selecciona tu producto, personalízalo y agrégalo al carrito 😊",
-        "Para comprar, primero agrega el producto al carrito y continúa con el pedido 🧾"
+        "🛒 Para comprar, selecciona tu producto y presiona 'Agregar al carrito'."
       ]
     },
-
     {
       "tag": "personalizacion",
       "patterns": [
-        "personalizar", "quiero personalizar",
-        "se puede personalizar", "con foto",
-        "con imagen", "con texto", "con nombre",
-        "poner imagen", "poner foto", "editar producto"
+        "personalizar", "quiero personalizar", "con mi diseño", "se puede personalizar", 
+        "con foto", "puedo poner mi imagen", "con imagen", "con texto", "con nombre", 
+        "mi propia foto", "poner imagen", "poner foto", "editar producto", "diseno propio",
+        "ponerle mi logo", "hacerlo a mi gusto", "se puede editar", "con mi propia imagen"
       ],
       "responses": [
-        "Claro 😊 Puedes personalizar con fotos, nombres o frases.",
-        "Puedes subir tu imagen o texto al elegir el producto 🎨",
-        "Todos nuestros productos son personalizables ✨",
-        "Personaliza tu producto agregando tu diseño favorito 🖌️"
+        "Claro 😊 Puedes personalizar con fotos, nombres o frases."
       ]
     },
-
     {
       "tag": "tiempo_entrega",
       "patterns": [
-        "cuanto tarda", "tiempo de entrega",
-        "cuando entregan", "dias de entrega",
-        "cuanto tiempo tarda", "cuando llega"
+        "cuanto tarda", "tiempo de entrega", "cuando me llega", "cuando entregan", 
+        "dias de entrega", "cuanto demora", "cuanto tiempo tarda", "cuando llega", 
+        "tardanza", "envio", "fecha de llegada", "paqueteria", "cuanto tardas en entregarlo",
+        "dias de espera", "llega hoy", "llega mañana", "haces envios rapidos", "tiempo de envio"
       ],
       "responses": [
-        "El tiempo de entrega es de 2 a 4 días hábiles ⏱️",
-        "Normalmente entregamos en un plazo de 2 a 4 días 📦",
-        "Tu pedido llegará en aproximadamente 2 a 4 días hábiles 😊"
+        "El tiempo de entrega es de 2 a 4 días hábiles ⏱️"
       ]
     },
-
-    {
-      "tag": "pedido",
-      "patterns": [
-        "hacer pedido", "como comprar",
-        "como hacer pedido", "quiero ordenar",
-        "proceso de compra", "como funciona la compra"
-      ],
-      "responses": [
-        "🧾 Para hacer un pedido:\n1. Elige tu producto\n2. Agrégalo al carrito\n3. Completa tu compra",
-        "Comprar es fácil:\nSelecciona tu producto, agrégalo al carrito y finaliza el pedido 😊",
-        "Solo elige tu producto, personalízalo y completa tu compra 🛒"
-      ]
-    },
-
     {
       "tag": "despedida",
       "patterns": [
-        "gracias", "muchas gracias",
-        "adios", "hasta luego", "bye"
+        "gracias", "muchas gracias", "ok gracias", "mil gracias", "adios", "hasta luego", 
+        "bye", "nos vemos", "chao", "sale bye", "gracias por la ayuda", "ya es todo",
+        "fue todo gracias", "hasta pronto"
       ],
       "responses": [
         "¡Gracias por visitarnos! 🙌",
-        "¡Que tengas un excelente día! 😊",
-        "¡Estamos para ayudarte cuando lo necesites! 👋",
         "¡Vuelve pronto! 😄"
       ]
-    },
-
-    {
-      "tag": "fallback",
-      "patterns": [
-        "asdfgh", "123456", "qwerty",
-        "no entiendo", "no sirve",
-        "???", "blabla", "xd"
-      ],
-      "responses": [
-        "No entendí eso 😅 ¿Puedes decirlo de otra forma?",
-        "Ups 🤔 no comprendí. Puedo ayudarte con productos o pedidos.",
-        "No estoy seguro de haber entendido 🤔 ¿Buscas productos o precios?",
-        "Intenta escribirlo diferente 😊 Puedo ayudarte con compras o productos."
-      ]
     }
-
   ]
 }

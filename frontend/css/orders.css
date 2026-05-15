@@ -1,113 +1,220 @@
-/* FONDO */
+/* ========================= */
+/* 🌍 GENERAL */
+/* ========================= */
+
 body{
-background:#bad9ce;
+    margin:0;
+    padding:0;
+    background:#bad9ce;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* CONTENEDOR PRINCIPAL */
+/* ========================= */
+/* 📦 CONTENEDOR */
+/* ========================= */
 
 .orders-wrapper{
-max-width:1100px;
-margin:auto;
-padding:40px 20px;
+    max-width:1100px;
+    margin:auto;
+    padding:40px 20px;
 }
 
 .orders-wrapper h1{
-margin-bottom:30px;
-color:#2c3e50;
+    margin-bottom:30px;
+    color:#0E6973;
+    text-align:center;
 }
 
-
-/* LISTA DE PEDIDOS */
+/* ========================= */
+/* 📋 LISTA DE PEDIDOS */
+/* ========================= */
 
 .orders-container{
-display:flex;
-flex-direction:column;
-gap:25px;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
 }
 
-
-/* TARJETA PEDIDO */
+/* ========================= */
+/* 🧾 TARJETA PEDIDO */
+/* ========================= */
 
 .order-card{
-
-background:white;
-border-radius:12px;
-padding:25px;
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
-border:1px solid #eee;
-
+    background:white;
+    border-radius:12px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    border:1px solid #eee;
 }
 
-
-/* HEADER PEDIDO */
+/* ========================= */
+/* 🔝 HEADER */
+/* ========================= */
 
 .order-header{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:20px;
-
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
 .order-header h3{
-margin:0;
-color:#333;
+    margin:0;
+    color:#333;
 }
 
 .order-date{
-font-size:14px;
-color:#777;
+    font-size:14px;
+    color:#777;
 }
 
-
-/* STATUS */
+/* ========================= */
+/* 🟢 STATUS BADGE */
+/* ========================= */
 
 .status-badge{
-padding:6px 14px;
-border-radius:20px;
-font-size:13px;
-font-weight:600;
-text-transform:capitalize;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    text-transform:capitalize;
+    display:inline-block;
 }
 
+/* 🔥 COLORES DE ESTADO */
 
-/* PRODUCTOS */
+.status-pending{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.status-process{
+    background:#cce5ff;
+    color:#004085;
+}
+
+.status-shipped{
+    background:#d4edda;
+    color:#155724;
+}
+
+.status-delivered{
+    background:#d1f7c4;
+    color:#0f5132;
+}
+
+.status-cancelled{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+.status-default{
+    background:#e2e3e5;
+    color:#41464b;
+}
+
+/* ========================= */
+/* 📦 PRODUCTOS */
+/* ========================= */
 
 .order-items ul{
-list-style:none;
-padding:0;
-margin-top:10px;
+    list-style:none;
+    padding:0;
+    margin-top:10px;
 }
 
 .order-items li{
-border-bottom:1px solid #eee;
-padding-bottom:15px;
-margin-bottom:15px;
+    border-bottom:1px solid #eee;
+    padding-bottom:15px;
+    margin-bottom:15px;
 }
 
-
-/* FOOTER */
+/* ========================= */
+/* 💰 FOOTER */
+/* ========================= */
 
 .order-footer{
-display:flex;
-justify-content:flex-end;
-margin-top:10px;
+    display:flex;
+    justify-content:flex-end;
+    margin-top:10px;
 }
 
 .order-total{
-font-size:18px;
-font-weight:bold;
-color:#0E6973;
+    font-size:18px;
+    font-weight:bold;
+    color:#0E6973;
 }
 
-
-/* MENSAJES */
+/* ========================= */
+/* ⚠️ MENSAJES */
+/* ========================= */
 
 .empty-orders,
 .error-orders{
-text-align:center;
-padding:40px;
-color:#666;
-font-size:18px;
+    text-align:center;
+    padding:40px;
+    color:#666;
+    font-size:18px;
+}
+
+/* ===================================================== */
+/* 📱 RESPONSIVE */
+/* ===================================================== */
+
+@media (max-width: 900px){
+
+    .orders-wrapper{
+        padding:30px 15px;
+    }
+
+    .order-card{
+        padding:20px;
+    }
+
+    .order-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .order-footer{
+        justify-content:flex-start;
+    }
+}
+
+@media (max-width: 600px){
+
+    .orders-wrapper{
+        padding:20px 10px;
+    }
+
+    .orders-wrapper h1{
+        font-size:22px;
+    }
+
+    .order-card{
+        padding:18px;
+    }
+
+    .order-header h3{
+        font-size:16px;
+    }
+
+    .order-date{
+        font-size:13px;
+    }
+
+    .status-badge{
+        font-size:12px;
+        padding:5px 10px;
+    }
+
+    .order-items li{
+        font-size:14px;
+    }
+
+    .order-total{
+        font-size:16px;
+    }
 }
