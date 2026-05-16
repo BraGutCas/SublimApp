@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // =====================================
     if (!user) {
         userSection.innerHTML = `
-            <a href="login.html" class="login-btn">Login</a>
+            <a href="login.html" class="login-btn">Iniciar Sesión</a>
         `;
         return;
     }
